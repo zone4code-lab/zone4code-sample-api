@@ -1,0 +1,29 @@
+{
+    "info": {
+        "name": "BLSM Template backend",
+        "Version": "0.0.1",
+        "env": "development"
+    },
+    "DB": {
+        "mongodb": {
+            "BASE_URL":"mongodb://localhost:27017",
+            "URL":"mongodb://localhost:27017/blsm",    
+            "DB_TYPE": "mongodb",
+            "DB_HOST": "127.0.0.1",
+            "DB_PORT": 27017,
+            "DB_USER": "",
+            "DB_PASSWORD": "",
+            "DB_NAME": "test"
+        }
+    },
+    "SYSTEM": {
+        "ORIGIN_HOST": "http://localhost:5000/",
+        "IS_SWAGGER_ENABLED": true,
+        "KEYCLOAK_URL": "",
+        "KEYCLOAK_CLIENT_ID": ""
+    },
+    "API": {
+        "API_HOST": "localhost",
+        "API_PORT": 5000
+    }
+}

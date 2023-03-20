@@ -1,0 +1,79 @@
+{
+  "name": "blsm-template-api",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "./app/api",
+  "repository": "https://github.com/mohqmedsahraoui/blsm-template-api.git",
+  "license": "MIT",
+  "scripts": {
+    "migrate:create": "./node_modules/.bin/migrate-mongo create",
+    "migrate:up": "./node_modules/.bin/migrate-mongo up",
+    "migrate:down": "./node_modules/.bin/migrate-mongo down",
+    "migrate:status": "./node_modules/.bin/migrate-mongo status",
+    "dev": "nodemon --es-module-specifier-resolution=node ./app/api",
+    "start": "node --es-module-specifier-resolution=node app.js",
+    "test": "sh ./test/lancher.sh",
+    "lint": "prettier --check ./api",
+    "lint:staged": "eslint --fix --max-warnings=0",
+    "precommit": "lint-staged",
+    "prepush": "sh ./test/lancher.sh",
+    "prettier": "prettier --write *.{js,md,json}",
+    "prepare": "husky install",
+    "generate:service": "hygen model new"
+  },
+  "lint-staged": {
+    "api/**/*.+(js|json)": [
+      "eslint . --fix"
+    ],
+    "api/**/*.{js,json,md}": [
+      "prettier --write"
+    ]
+  },
+  "dependencies": {
+    "@fastify/multipart": "^6.0.0",
+    "@hapi/joi": "^17.1.1",
+    "dotenv": "^16.0.0",
+    "encoding-negotiator": "^2.0.1",
+    "fastify": "^3.27.2",
+    "fastify-blipp": "^3.1.0",
+    "fastify-cors": "^6.0.3",
+    "fastify-express": "^0.3.3",
+    "fastify-helmet": "^7.0.1",
+    "fastify-swagger": "^4.15.0",
+    "fastify-url-data": "^3.0.3",
+    "husky": "6.0.0",
+    "hygen": "^6.2.11",
+    "i18n": "^0.14.1",
+    "joi-objectid": "^4.0.2",
+    "jsonwebtoken": "^8.5.1",
+    "lint-staged": "^12.3.4",
+    "migrate-mongo": "^9.0.0",
+    "mongodb": "^4.4.0",
+    "mongoose": "^6.2.4",
+    "mongoose-to-swagger": "^1.4.0",
+    "nconf": "^0.12.0",
+    "node-fetch": "^3.2.0",
+    "pino-pretty": "^7.6.1",
+    "tap": "^16.0.1",
+    "url-parse": "^1.5.10",
+    "url-pattern": "^1.0.3",
+    "util": "^0.12.4",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.17.5",
+    "@babel/eslint-parser": "^7.5.4",
+    "@babel/preset-env": "^7.16.11",
+    "babel-eslint": "^10.1.0",
+    "babel-jest": "^27.5.1",
+    "cors": "^2.8.5",
+    "eslint": "^8.10.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^8.4.0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-jest": "^26.1.1",
+    "eslint-plugin-prettier": "^4.0.0",
+    "nodemon": "^2.0.15",
+    "prettier": "^2.5.1"
+  }
+}

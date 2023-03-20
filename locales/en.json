@@ -1,0 +1,8 @@
+{
+    "unauthorized": "Unauthorized !",
+    "invalidId": "Invalid ID !",
+    "success": "success-en",
+    "invalidPage": "invalidPage",
+    "Cannot read property 'toString' of undefined": "Cannot read property 'toString' of undefined",
+    "Hello": "Hello"
+}
