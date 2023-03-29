@@ -65,6 +65,15 @@ export const mongoDbUrl = buildUrl({
 
 export const mongoDbBaseUrl = envVariables.DB.mongodb.BASE_URL;
 
+export const postgresDB = {
+  POSTGRES_USERNAME: envVariables.DB.postgres.POSTGRES_USERNAME,
+  POSTGRES_SECONDARY_USERNAME: envVariables.DB.postgres.POSTGRES_SECONDARY_USERNAME,
+  POSTGRES_PASSWORD: envVariables.DB.postgres.POSTGRES_PASSWORD,
+  POSTGRES_HOST: envVariables.DB.postgres.POSTGRES_HOST,
+  POSTGRES_PORT: envVariables.DB.postgres.POSTGRES_PORT,
+  POSTGRES_DATABASE: 'novencia',
+};
+
 export const configApp = {
   projectDir: path.resolve(),
   logDir: 'log',
