@@ -45,6 +45,8 @@ function build() {
     },
   });
 
+  fastify.decorateRequest('knex', null);
+
   fastify.register(connectDB);
   fastify.register(multipart);
   fastify.register(fastifyBlipp);
@@ -61,16 +63,9 @@ function build() {
   const middlewareLanguage = (request, reply, next) => {
     i18n.init(request, reply, next);
     i18n.setLocale(request.headers.local || DEFAULT_LANGUAGE);
-    knexMiddleware(request, reply, next);
   };
 
   const knexMiddleware = async (req, res, next) => {
-    // const user = req.query["user"];
-    // console.log("user :>> parse", JSON.parse(JSON.parse(user)));
-
-    //JSON.parse(user);
-    // dbConfig.initializeDB(req, res, next);
-
     const knexCache = new Map();
 
     // Function that parses the tenant id from path, header, query parameter etc.
@@ -86,7 +81,7 @@ function build() {
   function getKnexForRequest(req, knexCache) {
     // If you pass the tenantIs a query parameter, you would do something
     // like this.
-    let tenantId = req.query.tenantId;
+    let tenantId = req.params?.clientId;
     let knex = knexCache.get(tenantId);
 
     if (!knex) {
@@ -97,14 +92,15 @@ function build() {
     return knex;
   }
 
-  function knexConfigForTenant(tenantId) {
-    return dbConfig.initializeDB(tenantId);
+  async function knexConfigForTenant(tenantId) {
+    const config = await dbConfig.initializeDB(tenantId);
+    return config;
   }
 
   fastify.decorateReply('locals', null);
 
   routes.forEach((route) => {
-    fastify.route({ ...route, url: `/api/v1/:clientId${route.url}`, onRequest: middlewareLanguage, preHandler: null });
+    fastify.route({ ...route, url: `/api/v1/:clientId${route.url}`, onRequest: middlewareLanguage, preHandler: knexMiddleware });
   });
 
   fastify.get('/healthy/:clientId', () => ({ status: 'ok' }));

@@ -14,12 +14,6 @@ const initializeDB = async function (tenantId) {
    */
   let _knex = null;
   if (tenantId) {
-    /* if (!req.user || !req.user.role_scopes || !Array.isArray(req.role_scopes)) {
-      res.status(404).json({ message: "Invalid user header" });
-      return;
-    }
-*/
-
     _knex = Knex({
       ...KnexConfig,
       connection: `postgres://${postgresDB.POSTGRES_SECONDARY_USERNAME}:${postgresDB.POSTGRES_PASSWORD}@${postgresDB.POSTGRES_HOST}/${tenantId}?timezone=utc`,
@@ -29,7 +23,7 @@ const initializeDB = async function (tenantId) {
       },
 
       seeds: {
-        directory: __dirname + 'seeds',
+        directory: 'seeds',
       },
       // ...(req.method.toUpperCase() === 'POST' && { connection: `postgres://${postgresDB.POSTGRES_SECONDARY_USERNAME}:${postgresDB.POSTGRES_PASSWORD}@${postgresDB.POSTGRES_HOST}/${postgresDB.POSTGRES_DATABASE}?timezone=utc` }),
       pool: {

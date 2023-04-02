@@ -19,10 +19,10 @@ export const listPersons = async (knex) => {
   try {
     const data = await Person.query(knex).throwIfNotFound();
 
-    console.log('POOOOOOOL ===========>', knex.client);
+    //console.log('POOOOOOOL ===========>', knex.client);
     // await knex.destroy();
 
-    return { result: { status: '500', data: data } };
+    return { result: { status: '200', data: data } };
   } catch (err) {
     return { error: err };
   }

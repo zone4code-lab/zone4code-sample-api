@@ -1,4 +1,5 @@
-const { Model } = require('objection');
+import objection from 'objection';
+const { Model } = objection;
 
 class Task extends Model {
   static get tableName() {
@@ -19,4 +20,4 @@ class Task extends Model {
   }
 }
 
-module.exports = Task;
+export default Task;
