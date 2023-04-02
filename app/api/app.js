@@ -11,13 +11,14 @@ import multipart from '@fastify/multipart';
 
 import connectDB from '../../infra/adapters/mongoAdapter/utils/db';
 
+import dbConfig from '../../infra/adapters/postgresAdapter/utils/db/DatabaseConfig';
+
 import { i18nConfig } from '../../config/appSetting';
 import requireLogin from '../../domain/utils/requireLogin';
 import options from '../../domain/utils/swaggerOptions';
 import Permissions from '../../domain/utils/permissions';
 import { PROTECTED_URLS, NOT_PROTECTED } from './routes/permissions';
 import routes from './routes';
-
 
 export const dirname = path.resolve();
 
@@ -60,7 +61,45 @@ function build() {
   const middlewareLanguage = (request, reply, next) => {
     i18n.init(request, reply, next);
     i18n.setLocale(request.headers.local || DEFAULT_LANGUAGE);
+    knexMiddleware(request, reply, next);
   };
+
+  const knexMiddleware = async (req, res, next) => {
+    // const user = req.query["user"];
+    // console.log("user :>> parse", JSON.parse(JSON.parse(user)));
+
+    //JSON.parse(user);
+    // dbConfig.initializeDB(req, res, next);
+
+    const knexCache = new Map();
+
+    // Function that parses the tenant id from path, header, query parameter etc.
+    // and returns an instance of knex. You should cache the knex instances and
+    // not create a new one for each query. Knex takes care of connection pooling.
+
+    const dataConn = await getKnexForRequest(req, knexCache);
+
+    req.knex = dataConn;
+    next();
+  };
+
+  function getKnexForRequest(req, knexCache) {
+    // If you pass the tenantIs a query parameter, you would do something
+    // like this.
+    let tenantId = req.query.tenantId;
+    let knex = knexCache.get(tenantId);
+
+    if (!knex) {
+      knex = knexConfigForTenant(tenantId);
+      knexCache.set(tenantId, knex);
+    }
+
+    return knex;
+  }
+
+  function knexConfigForTenant(tenantId) {
+    return dbConfig.initializeDB(tenantId);
+  }
 
   fastify.decorateReply('locals', null);
 

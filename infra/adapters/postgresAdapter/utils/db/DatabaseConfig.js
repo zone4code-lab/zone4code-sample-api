@@ -1,10 +1,8 @@
 import Knex from 'knex';
 
-import { config } from '../../../../../config/configurationAdaptor';
+import { postgresDB } from '../../../../../config/appSetting.js';
 
-console.log('config :>> ', config);
-
-const KnexConfig = require('../knexfile');
+import KnexConfig from './knexfile';
 
 /**
  * @type {import("express").RequestHandler}
@@ -24,16 +22,16 @@ const initializeDB = async function (tenantId) {
 
     _knex = Knex({
       ...KnexConfig,
-      connection: `postgres://${config.POSTGRES_SECONDARY_USERNAME}:${config.POSTGRES_PASSWORD}@${config.POSTGRES_HOST}/${tenantId}?timezone=utc`,
+      connection: `postgres://${postgresDB.POSTGRES_SECONDARY_USERNAME}:${postgresDB.POSTGRES_PASSWORD}@${postgresDB.POSTGRES_HOST}/${tenantId}?timezone=utc`,
       migrations: {
         disableMigrationsListValidation: true,
-        directory: 'database/migrations',
+        directory: 'migrations',
       },
 
       seeds: {
-        directory: __dirname + '/database/seeds',
+        directory: __dirname + 'seeds',
       },
-      // ...(req.method.toUpperCase() === 'POST' && { connection: `postgres://${config.POSTGRES_SECONDARY_USERNAME}:${config.POSTGRES_PASSWORD}@${config.POSTGRES_HOST}/${config.POSTGRES_DATABASE}?timezone=utc` }),
+      // ...(req.method.toUpperCase() === 'POST' && { connection: `postgres://${postgresDB.POSTGRES_SECONDARY_USERNAME}:${postgresDB.POSTGRES_PASSWORD}@${postgresDB.POSTGRES_HOST}/${postgresDB.POSTGRES_DATABASE}?timezone=utc` }),
       pool: {
         min: 2,
         max: 4,
@@ -61,4 +59,4 @@ const initializeDB = async function (tenantId) {
   return _knex;
 };
 
-module.exports = { initializeDB };
+export default { initializeDB };
