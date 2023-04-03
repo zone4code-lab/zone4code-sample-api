@@ -67,15 +67,11 @@ function build() {
 
   const knexMiddleware = async (req, res, next) => {
     const knexCache = new Map();
-
     // Function that parses the tenant id from path, header, query parameter etc.
     // and returns an instance of knex. You should cache the knex instances and
     // not create a new one for each query. Knex takes care of connection pooling.
-
     const dataConn = await getKnexForRequest(req, knexCache);
-
     req.knex = dataConn;
-    next();
   };
 
   function getKnexForRequest(req, knexCache) {
@@ -99,11 +95,13 @@ function build() {
 
   fastify.decorateReply('locals', null);
 
-  routes.forEach((route) => {
-    fastify.route({ ...route, url: `/api/v1/:clientId${route.url}`, onRequest: middlewareLanguage, preHandler: knexMiddleware });
+  routes.map((route) => {
+    fastify.route({ ...route, url: `/api/v1/:clientId${route.url}`, onRequest: middlewareLanguage, preHandler: [knexMiddleware] });
   });
 
-  fastify.get('/healthy/:clientId', () => ({ status: 'ok' }));
+  fastify.get('/healthy/:clientId', () => {
+    return { status: 'ok' };
+  });
 
   return fastify;
 }

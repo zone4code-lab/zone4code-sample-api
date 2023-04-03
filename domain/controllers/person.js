@@ -13,6 +13,7 @@ export const getPersonById = async (req) => {
 };
 
 export const addPerson = async (req) => {
+  console.log('alooooo :>> ');
   const addPerson = await personRepository.addPerson(req.body, req.knex);
   return addPerson;
 };
