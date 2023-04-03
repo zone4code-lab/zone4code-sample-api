@@ -19,7 +19,14 @@
     "prepush": "sh ./test/lancher.sh",
     "prettier": "prettier --write *.{js,md,json}",
     "prepare": "husky install",
-    "generate:service": "hygen model new"
+    "generate:service": "hygen model new",
+    "dbm:make": "NODE_ENV=developpement knex migrate:make --knexfile infra/adapters/postgresAdapter/utils/db/knexfile.js",
+    "dbm-master:make": "NODE_ENV=developpement knex migrate:make --knexfile infra/adapters/postgresAdapter/utils/db/knexfile-master.js",
+    "dbm:latest": "NODE_ENV=developpement node infra/adapters/postgresAdapter/utils/db/migrate.js latest",
+    "dbm:up": "NODE_ENV=developpement node infra/adapters/postgresAdapter/utils/db/migrate.js up",
+    "dbm:rollback": "NODE_ENV=developpemen node infra/adapters/postgresAdapter/utils/db/migrate.js rollback",
+    "add:migration": "NODE_ENV=developpement knex migrate:latest --knexfile infra/adapters/postgresAdapter/utils/db/knexfile.js",
+    "add:seed": "NODE_ENV=developpement knex seed:run --knexfile infra/adapters/postgresAdapter/utils/db/knexfile.js"
   },
   "lint-staged": {
     "api/**/*.+(js|json)": [
@@ -58,7 +65,11 @@
     "url-parse": "^1.5.10",
     "url-pattern": "^1.0.3",
     "util": "^0.12.4",
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "knex": "^2.1.0",
+    "bluebird": "^3.7.2",
+    "objection": "^2.2.6",
+    "pg": "^8.5.1"
   },
   "devDependencies": {
     "@babel/core": "^7.17.5",

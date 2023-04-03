@@ -1,3 +1,4 @@
-import Config from './config';
 
-export default [...Config];
+import Person from './person';
+
+export default [...Person];

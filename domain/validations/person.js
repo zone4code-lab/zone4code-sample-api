@@ -1,13 +1,15 @@
 import validators from '../utils/validators';
-import * as configService from '../services';
+import * as personService from '../services';
 
 import { ValidationError } from '../utils/Errors';
 
 /**
- * @function validateAndGetConfig
+ * @function validateAndGetPerson
  */
 
-export const validateAndGetConfigs = async ({ clientId }) => {
+
+
+export const validateAndGetPersons = async ({ clientId }) => {
   const errors = {};
 
   const errorMessage = validators.isString(clientId, {
@@ -22,25 +24,25 @@ export const validateAndGetConfigs = async ({ clientId }) => {
   if (!validators.isEmptyObject(errors)) {
     return Promise.reject(
       new ValidationError({
-        name: 'Config',
+        name: 'Person',
         status: 400,
-        code: 'invalid_get_Config',
-        message: `Invalid get Config input data ${JSON.stringify(errors)}`,
-        debugMessage: '[Config] Error in getConfigById.',
+        code: 'invalid_get_Person',
+        message: `Invalid get Person input data ${JSON.stringify(errors)}`,
+        debugMessage: '[Person] Error in getPersonById.',
         error: errors,
       })
     );
   }
 
-  const data = await configService.getConfigs({ clientId });
+  const data = await personService.getPersons({ clientId });
   return data;
 };
 
 /**
- * @function validateAndGetByIdConfig
+ * @function validateAndGetByIdPerson
  */
 
-export const validateAndGetByIdConfig = ({ id, clientId }) => {
+export const validateAndGetByIdPerson = ({ id, clientId }) => {
   const errors = {};
 
   let errorMessage = validators.isObjectID(id, {
@@ -64,40 +66,40 @@ export const validateAndGetByIdConfig = ({ id, clientId }) => {
   if (!validators.isEmptyObject(errors)) {
     return Promise.reject(
       new ValidationError({
-        name: 'Config',
+        name: 'Person',
         status: 400,
-        code: 'invalid_get_Config',
-        message: `Invalid get Config input data ${JSON.stringify(errors)}`,
-        debugMessage: '[Config] Error in getConfigById.',
+        code: 'invalid_get_Person',
+        message: `Invalid get Person input data ${JSON.stringify(errors)}`,
+        debugMessage: '[Person] Error in getPersonById.',
         error: errors,
       })
     );
   }
-  return configService.getConfigById({ id, clientId });
+  return personService.getPersonById({ id, clientId });
 };
 
 /**
- * @function validateAndAddConfig
+ * @function validateAndAddPerson
  */
 
-export const validateAndAddConfig = (data) => {
+export const validateAndAddPerson = (data) => {
   const errors = {};
-  let errorMessage = validators.isString(data.size, {
+  let errorMessage = validators.isString(data.name, {
     required: true,
     min: 1,
   });
 
   if (errorMessage !== null) {
-    errors.size = errorMessage;
+    errors.name = errorMessage;
   }
 
-  errorMessage = validators.isArray(data.extension, {
+  errorMessage = validators.isString(data.description, {
     required: true,
     min: 1,
   });
 
   if (errorMessage !== null) {
-    errors.extension = errorMessage;
+    errors.description = errorMessage;
   }
 
   errorMessage = validators.isString(data.clientId, {
@@ -112,24 +114,24 @@ export const validateAndAddConfig = (data) => {
   if (!validators.isEmptyObject(errors)) {
     return Promise.reject(
       new ValidationError({
-        name: 'Config',
+        name: 'Person',
         status: 400,
-        code: 'invalid_create_Config',
-        message: `Invalid create Config input data ${JSON.stringify(errors)}`,
-        debugMessage: '[Config] Error in createConfig.',
+        code: 'invalid_create_Person',
+        message: `Invalid create Person input data ${JSON.stringify(errors)}`,
+        debugMessage: '[Person] Error in createPerson.',
         error: errors,
       })
     );
   }
-console.log('data :>> ', data);
-  return configService.addConfig({ ...data });
+
+  return personService.addPerson({ ...data });
 };
 
 /**
- * @function validateAndUpdateConfig
+ * @function validateAndUpdatePerson
  */
 
-export const validateAndUpdateConfig = ({ id }, data) => {
+export const validateAndUpdatePerson = ({ id, clientId }, body) => {
   const errors = {};
 
   let errorMessage = validators.isObjectID(id, {
@@ -141,26 +143,26 @@ export const validateAndUpdateConfig = ({ id }, data) => {
     errors.id = errorMessage;
   }
 
-  if (data.size) {
-    errorMessage = validators.isString(data.size, {
+  if (body.name) {
+    errorMessage = validators.isString(body.name, {
       required: true,
       min: 1,
     });
     if (errorMessage !== null) {
-      errors.size = errorMessage;
+      errors.name = errorMessage;
     }
   }
-  if (data.extension) {
-    errorMessage = validators.isString(data.extension, {
+  if (body.description) {
+    errorMessage = validators.isString(body.description, {
       required: true,
       min: 1,
     });
     if (errorMessage !== null) {
-      errors.extension = errorMessage;
+      errors.description = errorMessage;
     }
   }
 
-  errorMessage = validators.isString(data.clientId, {
+  errorMessage = validators.isString(clientId, {
     required: true,
     min: 1,
   });
@@ -172,24 +174,24 @@ export const validateAndUpdateConfig = ({ id }, data) => {
   if (!validators.isEmptyObject(errors)) {
     return Promise.reject(
       new ValidationError({
-        name: 'Config',
+        name: 'Person',
         status: 400,
-        code: 'invalid_update_Config',
-        message: `Invalid update Config input data ${JSON.stringify(errors)}`,
-        debugMessage: '[Config] Error in updateConfig.',
+        code: 'invalid_update_Person',
+        message: `Invalid update Person input data ${JSON.stringify(errors)}`,
+        debugMessage: '[Person] Error in updatePerson.',
         error: errors,
       })
     );
   }
 
-  return configService.updateConfig({ id, data, clientId: data.clientId });
+  return personService.updatePerson({ id, body, clientId });
 };
 
 /**
- * @function validateAndDeleteConfig
+ * @function validateAndDeletePerson
  */
 
-export const validateAndDeleteConfig = ({ id, clientId }) => {
+export const validateAndDeletePerson = ({ id, clientId }) => {
   const errors = {};
 
   let errorMessage = validators.isObjectID(id, {
@@ -210,16 +212,18 @@ export const validateAndDeleteConfig = ({ id, clientId }) => {
     errors.id = errorMessage;
     return Promise.reject(
       new ValidationError({
-        name: 'Config',
+        name: 'Person',
         status: 400,
-        code: 'invalid_delete_Config',
-        message: `Invalid get Config input data ${JSON.stringify(errors)}`,
-        debugMessage: '[Config] Error in deleteConfig.',
+        code: 'invalid_delete_Person',
+        message: `Invalid get Person input data ${JSON.stringify(errors)}`,
+        debugMessage: '[Person] Error in deletePerson.',
         error: errors,
       })
     );
   }
-  return configService.deleteConfig({ id });
+  return personService.deletePerson({ id, clientId });
 };
 
-export default { validateAndGetConfigs, validateAndUpdateConfig, validateAndDeleteConfig, validateAndGetByIdConfig };
+
+export default { validateAndGetPersons, validateAndUpdatePerson, validateAndDeletePerson, validateAndGetByIdPerson };
+
