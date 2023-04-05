@@ -47,7 +47,7 @@ export const validateAndGet<%= h.capitalize(name)%>s = async ({ clientId }, knex
 export const validateAndGetById<%= h.capitalize(name)%> = ({ id, clientId }, knex) => {
   const errors = {};
 
-  let errorMessage = validators.isPositiveInteger(id, {
+  let errorMessage = validators.isString(id, {
     required: true,
   });
 
@@ -83,9 +83,9 @@ export const validateAndGetById<%= h.capitalize(name)%> = ({ id, clientId }, kne
  * @function validateAndAdd<%= h.capitalize(name)%>
  */
 
-export const validateAndAdd<%= h.capitalize(name)%> = (data, knex) => {
+export const validateAndAdd<%= h.capitalize(name)%> = ({clientId},body, knex) => {
   const errors = {};
-  const errorMessage = validators.isString(data.name, {
+  let errorMessage = validators.isString(body.name, {
     required: true,
     min: 1,
   });
@@ -93,7 +93,7 @@ export const validateAndAdd<%= h.capitalize(name)%> = (data, knex) => {
   if (errorMessage !== null) {
     errors.name = errorMessage;
   }
-  errorMessage = validators.isString(data.clientId, {
+  errorMessage = validators.isString(clientId, {
     required: true,
     min: 1,
   });
@@ -107,15 +107,14 @@ export const validateAndAdd<%= h.capitalize(name)%> = (data, knex) => {
       new ValidationError({
         name: '<%= h.capitalize(name)%>',
         status: 400,
-        code: 'invalid_create_<%= h.capitalize(name)%>',
+        code: 'invalid_create_',
         message: `Invalid create <%= h.capitalize(name)%> input data ${JSON.stringify(errors)}`,
         debugMessage: '[<%= h.capitalize(name)%>] Error in create<%= h.capitalize(name)%>.',
         error: errors,
       })
     );
   }
-
-  return <%= name%>Service.add<%= h.capitalize(name)%>({ ...data }, knex);
+  return <%= name%>Service.add<%= h.capitalize(name)%>(body, knex);
 };
 
 /**
@@ -125,7 +124,7 @@ export const validateAndAdd<%= h.capitalize(name)%> = (data, knex) => {
 export const validateAndUpdate<%= h.capitalize(name)%> = ({ id, clientId }, body, knex) => {
   const errors = {};
 
-   let errorMessage = validators.isPositiveInteger(id, {
+   let errorMessage = validators.isString(id, {
     required: true,
   });
 

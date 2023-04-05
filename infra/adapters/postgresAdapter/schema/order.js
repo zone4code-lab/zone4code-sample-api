@@ -1,12 +1,9 @@
----
-to: infra/adapters/postgresAdapter/schema/<%= name%>.js
----
 import objection from 'objection';
 const { Model } = objection;
 
-class <%= h.capitalize(name)%> extends Model{
+class Order extends Model{
   static get tableName() {
-    return '<%= name%>';
+    return 'order';
   }
 
   static get jsonSchema() {
@@ -29,4 +26,4 @@ class <%= h.capitalize(name)%> extends Model{
 }
 
 // eslint-disable-next-line import/prefer-default-export
-export default <%= h.capitalize(name)%>;
+export default Order;

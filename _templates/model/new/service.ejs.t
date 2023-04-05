@@ -2,7 +2,7 @@
 to: domain/services/<%= name%>.js
 ---
 
-import * as <%= name%>Repository from '../../infra/adapters/mongoAdapter/repositories';
+import * as <%= name%>Repository from '../../infra/adapters/postgresAdapter/repositories';
 
 /**
  * @function get<%= h.capitalize(name)%>s
@@ -23,7 +23,7 @@ export const get<%= h.capitalize(name)%>ById = async ({ id }, knex) => {
 /**
  * @function add<%= h.capitalize(name)%>
  */
-export const add<%= h.capitalize(name)%> = async (data, knex) => {
+export const add<%= h.capitalize(name)%> = async (body, knex) => {
   const response = await <%= name%>Repository.add<%= h.capitalize(name)%>(data, knex);
 
   return response;

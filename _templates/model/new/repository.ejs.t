@@ -3,7 +3,7 @@ to: infra/adapters/postgresAdapter/repositories/<%= name%>.js
 ---
 
 /* import * as Models from '../models'; */
-import <%= h.capitalize(name)%> from '../schema/<%=name>';
+import <%= h.capitalize(name)%> from '../schema/<%=name%>';
 /**
  * @function get<%= h.capitalize(name)%>s
  */

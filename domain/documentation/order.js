@@ -1,10 +1,7 @@
----
-to: domain/documentation/<%= name%>.js
----
-export const add<%= h.capitalize(name)%>Schema = {
-  description: 'Create a new <%= h.capitalize(name)%>',
-  tags: ['<%= h.capitalize(name)%>'],
-  summary: 'Creates new <%= h.capitalize(name)%> with given values',
+export const addOrderSchema = {
+  description: 'Create a new Order',
+  tags: ['Order'],
+  summary: 'Creates new Order with given values',
   params: {
     type: 'object',
     properties: {
@@ -20,12 +17,12 @@ export const add<%= h.capitalize(name)%>Schema = {
      properties:{
       name: {
         type: 'string',
-        description: 'Name of the <%= name%> to add',
+        description: 'Name of the order to add',
         example: 'John Doe',
       },
       description: {
         type: 'string',
-        description: 'Description of the <%= name%> to add',
+        description: 'Description of the order to add',
         example: 'John Doe is smart',
       },
     }, 
@@ -45,7 +42,7 @@ export const add<%= h.capitalize(name)%>Schema = {
             properties: {
               name: {
                 type: 'string',
-                description: 'Name of the added <%= name%>',
+                description: 'Name of the added order',
                 example: 'John Doe',
               },
             },
@@ -67,10 +64,10 @@ export const add<%= h.capitalize(name)%>Schema = {
     },
   },
 };
-export const get<%= h.capitalize(name)%>Schema = {
-  description: 'Get a <%= h.capitalize(name)%>',
-  tags: ['<%= h.capitalize(name)%>'],
-  summary: 'Get a <%= h.capitalize(name)%> by name',
+export const getOrderSchema = {
+  description: 'Get a Order',
+  tags: ['Order'],
+  summary: 'Get a Order by name',
   params: {
     type: 'object',
     properties: {
@@ -97,12 +94,12 @@ export const get<%= h.capitalize(name)%>Schema = {
             properties: {
               name: {
                 type: 'string',
-                description: 'Name of the <%= name%>',
+                description: 'Name of the order',
                 example: 'John Doe',
               },
               description: {
                 type: 'string',
-                description: 'Description of the <%= name%> to get',
+                description: 'Description of the order to get',
                 example: 'John Doe is smart',
               },
             },
@@ -111,7 +108,7 @@ export const get<%= h.capitalize(name)%>Schema = {
       },
     },
     404: {
-      description: '<%= h.capitalize(name)%> not found',
+      description: 'Order not found',
       schema: {
         type: 'object',
         properties: {
@@ -125,10 +122,10 @@ export const get<%= h.capitalize(name)%>Schema = {
   },
 }
 
-export const get<%= h.capitalize(name)%>ByIdSchema = {
- description: 'Get a <%= h.capitalize(name)%> by ID',
-  tags: ['<%= h.capitalize(name)%>'],
-  summary: 'Retrieve a <%= h.capitalize(name)%> by ID',
+export const getOrderByIdSchema = {
+ description: 'Get a Order by ID',
+  tags: ['Order'],
+  summary: 'Retrieve a Order by ID',
   params: {
     type: 'object',
     properties: {
@@ -139,7 +136,7 @@ export const get<%= h.capitalize(name)%>ByIdSchema = {
       },
       id: {
         type: 'string',
-        description: 'ID of the <%= name%> to retrieve',
+        description: 'ID of the order to retrieve',
         example: 1,
       },
     },
@@ -160,12 +157,12 @@ export const get<%= h.capitalize(name)%>ByIdSchema = {
             properties: {
               name: {
                 type: 'string',
-                description: 'Name of the <%= name%>',
+                description: 'Name of the order',
                 example: 'John Doe',
               },
               description: {
                 type: 'string',
-                description: 'Name of the <%= name%> to get',
+                description: 'Name of the order to get',
                 example: 'John Doe is smart',
               },
             },
@@ -174,7 +171,7 @@ export const get<%= h.capitalize(name)%>ByIdSchema = {
       },
     },
     404: {
-      description: '<%= h.capitalize(name)%> not found',
+      description: 'Order not found',
       schema: {
         type: 'object',
         properties: {
@@ -187,21 +184,21 @@ export const get<%= h.capitalize(name)%>ByIdSchema = {
     },
   },
 };
-export const update<%= h.capitalize(name)%>Schema = {
-  description: 'update a <%= h.capitalize(name)%>',
-  tags: ['<%= h.capitalize(name)%>'],
-  summary: 'Update <%= h.capitalize(name)%> with given values',
+export const updateOrderSchema = {
+  description: 'update a Order',
+  tags: ['Order'],
+  summary: 'Update Order with given values',
   body: {
     type: 'object',
     properties:{
       name: {
         type: 'string',
-        description: 'Name of the <%= name%> to add',
+        description: 'Name of the order to add',
         example: 'John Doe',
       },
       description: {
         type: 'string',
-        description: 'Description of the <%= name%> to add',
+        description: 'Description of the order to add',
         example: 'John Doe is smart',
       },
     }, 
@@ -215,7 +212,7 @@ export const update<%= h.capitalize(name)%>Schema = {
       },
       id: {
         type: 'string',
-        description: '<%= h.capitalize(name)%> id',
+        description: 'Order id',
       },
     },
   },
@@ -233,12 +230,12 @@ export const update<%= h.capitalize(name)%>Schema = {
             properties: {
               name: {
                 type: 'string',
-                description: 'Name of the <%= name%>',
+                description: 'Name of the order',
                 example: 'John Doe',
               },
               description: {
                 type: 'string',
-                description: 'Description of the <%= name%> to update',
+                description: 'Description of the order to update',
                 example: 'John Doe is smart',
               },
             },
@@ -248,10 +245,10 @@ export const update<%= h.capitalize(name)%>Schema = {
   },
 };
 
-export const delete<%= h.capitalize(name)%>Schema = {
-  description: 'Delete a <%= h.capitalize(name)%>',
-  tags: ['<%= h.capitalize(name)%>'],
-  summary: 'Delete a <%= h.capitalize(name)%> by ID',
+export const deleteOrderSchema = {
+  description: 'Delete a Order',
+  tags: ['Order'],
+  summary: 'Delete a Order by ID',
   params: {
     type: 'object',
     properties: {
@@ -262,7 +259,7 @@ export const delete<%= h.capitalize(name)%>Schema = {
       },
       id: {
         type: 'string',
-        description: 'ID of the <%= name%> to delete',
+        description: 'ID of the order to delete',
         example: 1,
       },
     },
@@ -286,7 +283,7 @@ export const delete<%= h.capitalize(name)%>Schema = {
       },
     },
     404: {
-      description: '<%= h.capitalize(name)%> not found',
+      description: 'Order not found',
       schema: {
         type: 'object',
         properties: {
@@ -300,6 +297,6 @@ export const delete<%= h.capitalize(name)%>Schema = {
   },
 };
 
-export default { add<%= h.capitalize(name)%>Schema, get<%= h.capitalize(name)%>Schema, get<%= h.capitalize(name)%>ByIdSchema, update<%= h.capitalize(name)%>Schema, delete<%= h.capitalize(name)%>Schema };
+export default { addOrderSchema, getOrderSchema, getOrderByIdSchema, updateOrderSchema, deleteOrderSchema };
 
 

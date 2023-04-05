@@ -1,3 +1,3 @@
 /* eslint-disable import/export */
-
-export * from './person';
+export * from './product';
+export * from './order';

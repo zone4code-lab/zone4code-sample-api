@@ -1,21 +1,24 @@
 export const seed = function (knex, Promise) {
   // Deletes ALL existing entries
-  return knex('user')
+  return knex('product')
     .del()
     .then(function () {
       // Inserts seed entries
-      return knex('user').insert([
+      return knex('product').insert([
         {
           id: 1,
-          name: 'nigel@email.com',
+          name: 'data',
+          description: 'data'
         },
         {
           id: 2,
-          name: 'nakaz@email.com',
+          name: 'data',
+          description: 'data'
         },
         {
           id: 3,
-          name: 'jaywon@email.com',
+          name: 'data',
+          description: 'data'
         },
       ]);
     });

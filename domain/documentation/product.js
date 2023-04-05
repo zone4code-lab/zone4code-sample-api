@@ -1,7 +1,7 @@
-export const addPersonSchema = {
-  description: 'Create a new Person',
-  tags: ['Person'],
-  summary: 'Creates new Person with given values',
+export const addProductSchema = {
+  description: 'Create a new Product',
+  tags: ['Product'],
+  summary: 'Creates new Product with given values',
   params: {
     type: 'object',
     properties: {
@@ -14,15 +14,15 @@ export const addPersonSchema = {
   },
   body: {
     type: 'object',
-    properties:{
+     properties:{
       name: {
         type: 'string',
-        description: 'Name of the person to add',
+        description: 'Name of the product to add',
         example: 'John Doe',
       },
       description: {
         type: 'string',
-        description: 'Description of the person to add',
+        description: 'Description of the product to add',
         example: 'John Doe is smart',
       },
     }, 
@@ -42,13 +42,8 @@ export const addPersonSchema = {
             properties: {
               name: {
                 type: 'string',
-                description: 'Name of the added person',
+                description: 'Name of the added product',
                 example: 'John Doe',
-              },
-              description: {
-                type: 'string',
-                description: 'Description of the added person',
-                example: 'John Doe is smart',
               },
             },
           },
@@ -69,10 +64,10 @@ export const addPersonSchema = {
     },
   },
 };
-export const getPersonSchema = {
-  description: 'Get a Person',
-  tags: ['Person'],
-  summary: 'Get a Person by name',
+export const getProductSchema = {
+  description: 'Get a Product',
+  tags: ['Product'],
+  summary: 'Get a Product by name',
   params: {
     type: 'object',
     properties: {
@@ -99,12 +94,12 @@ export const getPersonSchema = {
             properties: {
               name: {
                 type: 'string',
-                description: 'Name of the person',
+                description: 'Name of the product',
                 example: 'John Doe',
               },
               description: {
                 type: 'string',
-                description: 'Description of the person to get',
+                description: 'Description of the product to get',
                 example: 'John Doe is smart',
               },
             },
@@ -113,7 +108,7 @@ export const getPersonSchema = {
       },
     },
     404: {
-      description: 'Person not found',
+      description: 'Product not found',
       schema: {
         type: 'object',
         properties: {
@@ -125,11 +120,12 @@ export const getPersonSchema = {
       },
     },
   },
-};
-export const getPersonByIdSchema = {
-  description: 'Get a Person by ID',
-  tags: ['Person'],
-  summary: 'Retrieve a Person by ID',
+}
+
+export const getProductByIdSchema = {
+ description: 'Get a Product by ID',
+  tags: ['Product'],
+  summary: 'Retrieve a Product by ID',
   params: {
     type: 'object',
     properties: {
@@ -139,8 +135,8 @@ export const getPersonByIdSchema = {
         example: 'novencia',
       },
       id: {
-        type: 'integer',
-        description: 'ID of the person to retrieve',
+        type: 'string',
+        description: 'ID of the product to retrieve',
         example: 1,
       },
     },
@@ -161,12 +157,12 @@ export const getPersonByIdSchema = {
             properties: {
               name: {
                 type: 'string',
-                description: 'Name of the person',
+                description: 'Name of the product',
                 example: 'John Doe',
               },
               description: {
                 type: 'string',
-                description: 'Description of the person to get',
+                description: 'Name of the product to get',
                 example: 'John Doe is smart',
               },
             },
@@ -175,7 +171,7 @@ export const getPersonByIdSchema = {
       },
     },
     404: {
-      description: 'Person not found',
+      description: 'Product not found',
       schema: {
         type: 'object',
         properties: {
@@ -188,43 +184,43 @@ export const getPersonByIdSchema = {
     },
   },
 };
-export const updatePersonSchema = {
-  description: 'Update a Person',
-  tags: ['Person'],
-  summary: 'Update a Person by id',
-  params: {
-    type: 'object',
-    properties: {
-      clientId: {
-        type: 'string',
-        description: 'Name of the client',
-        example: 'novencia',
-      },
-      id: {
-        type: 'integer',
-        description: 'ID of the person to retrieve',
-        example: 1,
-      },
-    },
-    required: ['clientId', 'id'],
-  },
+export const updateProductSchema = {
+  description: 'update a Product',
+  tags: ['Product'],
+  summary: 'Update Product with given values',
   body: {
     type: 'object',
-    properties: {
+    properties:{
       name: {
         type: 'string',
-        description: 'Name of the person',
+        description: 'Name of the product to add',
         example: 'John Doe',
       },
-    },
-    required: ['name'],
+      description: {
+        type: 'string',
+        description: 'Description of the product to add',
+        example: 'John Doe is smart',
+      },
+    }, 
   },
-  responses: {
+  params: {
+    type: 'object',
+    properties: {
+      clientId: {
+        type: 'string',
+        description: 'clientId',
+      },
+      id: {
+        type: 'string',
+        description: 'Product id',
+      },
+    },
+  },
+  response: {
     200: {
       description: 'Successful response',
-      schema: {
-        type: 'object',
-        properties: {
+      type: 'object',
+       properties: {
           status: {
             type: 'string',
             description: 'HTTP status code',
@@ -232,44 +228,27 @@ export const updatePersonSchema = {
           data: {
             type: 'object',
             properties: {
-              id: {
-                type: 'integer',
-                description: 'Id of the updated person',
-                example: 1,
-              },
               name: {
                 type: 'string',
-                description: 'Name of the updated person',
+                description: 'Name of the product',
                 example: 'John Doe',
               },
               description: {
                 type: 'string',
-                description: 'Description of the updated person',
+                description: 'Description of the product to update',
                 example: 'John Doe is smart',
               },
             },
           },
         },
-      },
-    },
-    404: {
-      description: 'Person not found',
-      schema: {
-        type: 'object',
-        properties: {
-          error: {
-            type: 'string',
-            description: 'Error message',
-          },
-        },
-      },
     },
   },
 };
-export const deletePersonSchema = {
-  description: 'Delete a Person',
-  tags: ['Person'],
-  summary: 'Delete a Person by ID',
+
+export const deleteProductSchema = {
+  description: 'Delete a Product',
+  tags: ['Product'],
+  summary: 'Delete a Product by ID',
   params: {
     type: 'object',
     properties: {
@@ -279,8 +258,8 @@ export const deletePersonSchema = {
         example: 'novencia',
       },
       id: {
-        type: 'integer',
-        description: 'ID of the person to delete',
+        type: 'string',
+        description: 'ID of the product to delete',
         example: 1,
       },
     },
@@ -304,7 +283,7 @@ export const deletePersonSchema = {
       },
     },
     404: {
-      description: 'Person not found',
+      description: 'Product not found',
       schema: {
         type: 'object',
         properties: {
@@ -317,4 +296,7 @@ export const deletePersonSchema = {
     },
   },
 };
-export default { getPersonSchema, addPersonSchema, getPersonByIdSchema, updatePersonSchema, deletePersonSchema };
+
+export default { addProductSchema, getProductSchema, getProductByIdSchema, updateProductSchema, deleteProductSchema };
+
+

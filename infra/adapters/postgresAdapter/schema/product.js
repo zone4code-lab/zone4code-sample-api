@@ -1,9 +1,9 @@
 import objection from 'objection';
 const { Model } = objection;
 
-class Person extends Model {
+class Product extends Model{
   static get tableName() {
-    return 'person';
+    return 'product';
   }
 
   static get jsonSchema() {
@@ -16,6 +16,13 @@ class Person extends Model {
       },
     };
   }
+
+  static get relationMappings() {
+    // Importing models here is one way to avoid require loops.
+    return {
+      // Add any required relation mappings here
+    };
+  }
 }
 
-export default Person;
+export default Product;
