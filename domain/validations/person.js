@@ -9,9 +9,8 @@ import { ValidationError } from '../utils/Errors';
 
 
 
-export const validateAndGetPersons = async ({ clientId }) => {
+export const validateAndGetPersons = async ({ clientId }, knex) => {
   const errors = {};
-
   const errorMessage = validators.isString(clientId, {
     required: true,
     min: 1,
@@ -34,7 +33,7 @@ export const validateAndGetPersons = async ({ clientId }) => {
     );
   }
 
-  const data = await personService.getPersons({ clientId });
+  const data = await personService.getPersons(knex);
   return data;
 };
 
@@ -42,19 +41,17 @@ export const validateAndGetPersons = async ({ clientId }) => {
  * @function validateAndGetByIdPerson
  */
 
-export const validateAndGetByIdPerson = ({ id, clientId }) => {
+export const validateAndGetByIdPerson = ({ id, clientId }, knex) => {
   const errors = {};
-
-  let errorMessage = validators.isObjectID(id, {
+  let errorMessage = validators.isString(id, {
     required: true,
-    min: 1,
   });
 
   if (errorMessage !== null) {
     errors.id = errorMessage;
   }
 
-  errorMessage = validators.isString(clientId, {
+   errorMessage = validators.isString(clientId, {
     required: true,
     min: 1,
   });
@@ -75,40 +72,21 @@ export const validateAndGetByIdPerson = ({ id, clientId }) => {
       })
     );
   }
-  return personService.getPersonById({ id, clientId });
+  return personService.getPersonById({ id }, knex);
 };
 
 /**
  * @function validateAndAddPerson
  */
 
-export const validateAndAddPerson = (data) => {
+export const validateAndAddPerson = (data, knex) => {
   const errors = {};
-  let errorMessage = validators.isString(data.name, {
+  const errorMessage = validators.isString(data.name, {
     required: true,
     min: 1,
   });
-
   if (errorMessage !== null) {
     errors.name = errorMessage;
-  }
-
-  errorMessage = validators.isString(data.description, {
-    required: true,
-    min: 1,
-  });
-
-  if (errorMessage !== null) {
-    errors.description = errorMessage;
-  }
-
-  errorMessage = validators.isString(data.clientId, {
-    required: true,
-    min: 1,
-  });
-
-  if (errorMessage !== null) {
-    errors.clientId = errorMessage;
   }
 
   if (!validators.isEmptyObject(errors)) {
@@ -124,25 +102,23 @@ export const validateAndAddPerson = (data) => {
     );
   }
 
-  return personService.addPerson({ ...data });
+  return personService.addPerson({ ...data }, knex);
 };
 
 /**
  * @function validateAndUpdatePerson
  */
 
-export const validateAndUpdatePerson = ({ id, clientId }, body) => {
+export const validateAndUpdatePerson = ({ id, clientId }, body, knex) => {
   const errors = {};
 
-  let errorMessage = validators.isObjectID(id, {
+  let errorMessage = validators.isString(id, {
     required: true,
-    min: 1,
   });
 
   if (errorMessage !== null) {
     errors.id = errorMessage;
   }
-
   if (body.name) {
     errorMessage = validators.isString(body.name, {
       required: true,
@@ -150,15 +126,6 @@ export const validateAndUpdatePerson = ({ id, clientId }, body) => {
     });
     if (errorMessage !== null) {
       errors.name = errorMessage;
-    }
-  }
-  if (body.description) {
-    errorMessage = validators.isString(body.description, {
-      required: true,
-      min: 1,
-    });
-    if (errorMessage !== null) {
-      errors.description = errorMessage;
     }
   }
 
@@ -184,19 +151,18 @@ export const validateAndUpdatePerson = ({ id, clientId }, body) => {
     );
   }
 
-  return personService.updatePerson({ id, body, clientId });
+  return personService.updatePerson({ id }, body, knex);
 };
 
 /**
  * @function validateAndDeletePerson
  */
 
-export const validateAndDeletePerson = ({ id, clientId }) => {
+export const validateAndDeletePerson = ({ id, clientId }, knex) => {
   const errors = {};
 
-  let errorMessage = validators.isObjectID(id, {
+  let errorMessage = validators.isPositiveInteger(id, {
     required: true,
-    min: 1,
   });
 
   errorMessage = validators.isString(clientId, {
@@ -221,7 +187,7 @@ export const validateAndDeletePerson = ({ id, clientId }) => {
       })
     );
   }
-  return personService.deletePerson({ id, clientId });
+  return personService.deletePerson({ id }, knex);
 };
 
 

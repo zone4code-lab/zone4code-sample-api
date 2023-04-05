@@ -12,6 +12,7 @@ class Person extends Model {
       // required: [],
       properties: {
         name: { type: 'string' },
+        description: { type: 'string' },
       },
     };
   }

@@ -1,13 +1,13 @@
 {
   "info": {
-    "name": "BLSM Template backend",
+    "name": "zone4code Template backend",
     "Version": "0.0.1",
     "env": "development"
   },
   "DB": {
     "mongodb": {
       "BASE_URL": "mongodb://localhost:27017",
-      "URL": "mongodb://localhost:27017/blsm",
+      "URL": "mongodb://localhost:27017/zone4code",
       "DB_TYPE": "mongodb",
       "DB_HOST": "127.0.0.1",
       "DB_PORT": 27017,

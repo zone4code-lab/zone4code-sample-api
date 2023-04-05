@@ -1,9 +1,9 @@
 {
-  "name": "blsm-template-api",
+  "name": "zone4code-template-api",
   "version": "1.0.0",
   "type": "module",
   "main": "./app/api",
-  "repository": "https://github.com/mohqmedsahraoui/blsm-template-api.git",
+  "repository": "https://github.com/mohqmedsahraoui/zone4code-template-api.git",
   "license": "MIT",
   "scripts": {
     "migrate:create": "./node_modules/.bin/migrate-mongo create",

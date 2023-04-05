@@ -8,40 +8,39 @@ import * as <%= name%>Repository from '../../infra/adapters/mongoAdapter/reposit
  * @function get<%= h.capitalize(name)%>s
  */
 
-export const get<%= h.capitalize(name)%>s = async ({ clientId }) => {
-  const response = await <%= name%>Repository.get<%= h.capitalize(name)%>s({ clientId });
-
+export const get<%= h.capitalize(name)%>s = async (knex) => {
+  const response = await <%= name%>Repository.get<%= h.capitalize(name)%>s(knex);
   return response;
 };
 /**
  * @function get<%= h.capitalize(name)%>ById
  */
-export const get<%= h.capitalize(name)%>ById = async ({ id, clientId }) => {
-  const response = await <%= name%>Repository.get<%= h.capitalize(name)%>ById({ id, clientId });
+export const get<%= h.capitalize(name)%>ById = async ({ id }, knex) => {
+  const response = await <%= name%>Repository.get<%= h.capitalize(name)%>ById({ id }, knex);
 
   return response;
 };
 /**
  * @function add<%= h.capitalize(name)%>
  */
-export const add<%= h.capitalize(name)%> = async ({ name, description, clientId }) => {
-  const response = await <%= name%>Repository.add<%= h.capitalize(name)%>({ name, description, clientId });
+export const add<%= h.capitalize(name)%> = async (data, knex) => {
+  const response = await <%= name%>Repository.add<%= h.capitalize(name)%>(data, knex);
 
   return response;
 };
 /**
  * @function update<%= h.capitalize(name)%>
  */
-export const update<%= h.capitalize(name)%> = async ({ id, body, clientId }) => {
-  const response = await <%= name%>Repository.update<%= h.capitalize(name)%>({ id, body, clientId });
+export const update<%= h.capitalize(name)%> = async ({ id }, body, knex) => {
+  const response = await <%= name%>Repository.update<%= h.capitalize(name)%>({ id }, body, knex);
 
   return response;
 };
 /**
  * @function delete<%= h.capitalize(name)%>
  */
-export const delete<%= h.capitalize(name)%> = async ({ id, clientId }) => {
-  const response = await <%= name%>Repository.delete<%= h.capitalize(name)%>({ id, clientId });
+export const delete<%= h.capitalize(name)%> = async ({ id }, knex) => {
+  const response = await <%= name%>Repository.delete<%= h.capitalize(name)%>({ id }, knex);
 
   return response;
 };

@@ -329,4 +329,17 @@ export default {
 
     return val ? null : 'object is not type of object';
   },
+  isPositiveInteger(value, field = {}) {
+    const errorMessage = rules.checkEmpty(value, field);
+  
+    if (errorMessage !== null) {
+      return errorMessage;
+    }
+  
+    if (!/^\d+$/.test(value) || parseInt(value) <= 0) {
+      return errorMessages.invalidPositiveInteger;
+    }
+  
+    return null;
+  }
 };
