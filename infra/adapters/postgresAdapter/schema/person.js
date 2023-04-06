@@ -1,9 +1,9 @@
 import objection from 'objection';
 const { Model } = objection;
 
-class Product extends Model{
+class Person extends Model{
   static get tableName() {
-    return 'product';
+    return 'person';
   }
 
   static get jsonSchema() {
@@ -25,4 +25,5 @@ class Product extends Model{
   }
 }
 
-export default Product;
+// eslint-disable-next-line import/prefer-default-export
+export default Person;

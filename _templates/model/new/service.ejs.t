@@ -24,7 +24,7 @@ export const get<%= h.capitalize(name)%>ById = async ({ id }, knex) => {
  * @function add<%= h.capitalize(name)%>
  */
 export const add<%= h.capitalize(name)%> = async (body, knex) => {
-  const response = await <%= name%>Repository.add<%= h.capitalize(name)%>(data, knex);
+  const response = await <%= name%>Repository.add<%= h.capitalize(name)%>(body, knex);
 
   return response;
 };

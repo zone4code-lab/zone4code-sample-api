@@ -1,13 +1,13 @@
 import validators from '../utils/validators';
-import * as orderService from '../services';
+import * as personService from '../services';
 
 import { ValidationError } from '../utils/Errors';
 
 /**
- * @function validateAndGetOrder
+ * @function validateAndGetPerson
  */
 
-export const validateAndGetOrders = async ({ clientId }, knex) => {
+export const validateAndGetPersons = async ({ clientId }, knex) => {
   const errors = {};
 
   const errorMessage = validators.isString(clientId, {
@@ -22,25 +22,25 @@ export const validateAndGetOrders = async ({ clientId }, knex) => {
   if (!validators.isEmptyObject(errors)) {
     return Promise.reject(
       new ValidationError({
-        name: 'Order',
+        name: 'Person',
         status: 400,
-        code: 'invalid_get_Order',
-        message: `Invalid get Order input data ${JSON.stringify(errors)}`,
-        debugMessage: '[Order] Error in getOrderById.',
+        code: 'invalid_get_Person',
+        message: `Invalid get Person input data ${JSON.stringify(errors)}`,
+        debugMessage: '[Person] Error in getPersonById.',
         error: errors,
       })
     );
   }
 
-  const data = await orderService.getOrders(knex);
+  const data = await personService.getPersons(knex);
   return data;
 };
 
 /**
- * @function validateAndGetByIdOrder
+ * @function validateAndGetByIdPerson
  */
 
-export const validateAndGetByIdOrder = ({ id, clientId }, knex) => {
+export const validateAndGetByIdPerson = ({ id, clientId }, knex) => {
   const errors = {};
 
   let errorMessage = validators.isString(id, {
@@ -63,23 +63,23 @@ export const validateAndGetByIdOrder = ({ id, clientId }, knex) => {
   if (!validators.isEmptyObject(errors)) {
     return Promise.reject(
       new ValidationError({
-        name: 'Order',
+        name: 'Person',
         status: 400,
-        code: 'invalid_get_Order',
-        message: `Invalid get Order input data ${JSON.stringify(errors)}`,
-        debugMessage: '[Order] Error in getOrderById.',
+        code: 'invalid_get_Person',
+        message: `Invalid get Person input data ${JSON.stringify(errors)}`,
+        debugMessage: '[Person] Error in getPersonById.',
         error: errors,
       })
     );
   }
-  return orderService.getOrderById({ id }, knex);
+  return personService.getPersonById({ id }, knex);
 };
 
 /**
- * @function validateAndAddOrder
+ * @function validateAndAddPerson
  */
 
-export const validateAndAddOrder = ({clientId},body, knex) => {
+export const validateAndAddPerson = ({clientId},body, knex) => {
   const errors = {};
   let errorMessage = validators.isString(body.name, {
     required: true,
@@ -101,23 +101,23 @@ export const validateAndAddOrder = ({clientId},body, knex) => {
   if (!validators.isEmptyObject(errors)) {
     return Promise.reject(
       new ValidationError({
-        name: 'Order',
+        name: 'Person',
         status: 400,
         code: 'invalid_create_',
-        message: `Invalid create Order input data ${JSON.stringify(errors)}`,
-        debugMessage: '[Order] Error in createOrder.',
+        message: `Invalid create Person input data ${JSON.stringify(errors)}`,
+        debugMessage: '[Person] Error in createPerson.',
         error: errors,
       })
     );
   }
-  return orderService.addOrder(body, knex);
+  return personService.addPerson(body, knex);
 };
 
 /**
- * @function validateAndUpdateOrder
+ * @function validateAndUpdatePerson
  */
 
-export const validateAndUpdateOrder = ({ id, clientId }, body, knex) => {
+export const validateAndUpdatePerson = ({ id, clientId }, body, knex) => {
   const errors = {};
 
    let errorMessage = validators.isString(id, {
@@ -149,24 +149,24 @@ export const validateAndUpdateOrder = ({ id, clientId }, body, knex) => {
   if (!validators.isEmptyObject(errors)) {
     return Promise.reject(
       new ValidationError({
-        name: 'Order',
+        name: 'Person',
         status: 400,
-        code: 'invalid_update_Order',
-        message: `Invalid update Order input data ${JSON.stringify(errors)}`,
-        debugMessage: '[Order] Error in updateOrder.',
+        code: 'invalid_update_Person',
+        message: `Invalid update Person input data ${JSON.stringify(errors)}`,
+        debugMessage: '[Person] Error in updatePerson.',
         error: errors,
       })
     );
   }
 
-  return orderService.updateOrder({ id }, body, knex);
+  return personService.updatePerson({ id }, body, knex);
 };
 
 /**
- * @function validateAndDeleteOrder
+ * @function validateAndDeletePerson
  */
 
-export const validateAndDeleteOrder = ({ id, clientId }, knex) => {
+export const validateAndDeletePerson = ({ id, clientId }, knex) => {
   const errors = {};
    let errorMessage = validators.isPositiveInteger(id, {
     required: true,
@@ -185,16 +185,16 @@ export const validateAndDeleteOrder = ({ id, clientId }, knex) => {
     errors.id = errorMessage;
     return Promise.reject(
       new ValidationError({
-        name: 'Order',
+        name: 'Person',
         status: 400,
-        code: 'invalid_delete_Order',
-        message: `Invalid get Order input data ${JSON.stringify(errors)}`,
-        debugMessage: '[Order] Error in deleteOrder.',
+        code: 'invalid_delete_Person',
+        message: `Invalid get Person input data ${JSON.stringify(errors)}`,
+        debugMessage: '[Person] Error in deletePerson.',
         error: errors,
       })
     );
   }
-  return orderService.deleteOrder({ id }, knex);
+  return personService.deletePerson({ id }, knex);
 };
-export default { validateAndGetOrders, validateAndUpdateOrder, validateAndDeleteOrder, validateAndGetByIdOrder };
+export default { validateAndGetPersons, validateAndUpdatePerson, validateAndDeletePerson, validateAndGetByIdPerson };
 

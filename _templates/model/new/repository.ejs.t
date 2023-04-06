@@ -7,7 +7,7 @@ import <%= h.capitalize(name)%> from '../schema/<%=name%>';
 /**
  * @function get<%= h.capitalize(name)%>s
  */
-export const get<%= h.capitalize(name)%>s = async ({ knex }) => {
+export const get<%= h.capitalize(name)%>s = async (knex) => {
   try {
     const data = await <%= h.capitalize(name)%>.query(knex).throwIfNotFound();
     return { result: { status: '200', data: data } };

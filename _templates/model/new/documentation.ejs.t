@@ -70,7 +70,7 @@ export const add<%= h.capitalize(name)%>Schema = {
 export const get<%= h.capitalize(name)%>Schema = {
   description: 'Get a <%= h.capitalize(name)%>',
   tags: ['<%= h.capitalize(name)%>'],
-  summary: 'Get a <%= h.capitalize(name)%> by name',
+  summary: 'Get all <%= h.capitalize(name)%>s',
   params: {
     type: 'object',
     properties: {
@@ -196,12 +196,12 @@ export const update<%= h.capitalize(name)%>Schema = {
     properties:{
       name: {
         type: 'string',
-        description: 'Name of the <%= name%> to add',
+        description: 'Name of the <%= name%> to update',
         example: 'John Doe',
       },
       description: {
         type: 'string',
-        description: 'Description of the <%= name%> to add',
+        description: 'Description of the <%= name%> to update',
         example: 'John Doe is smart',
       },
     }, 
@@ -219,11 +219,12 @@ export const update<%= h.capitalize(name)%>Schema = {
       },
     },
   },
-  response: {
+  responses: {
     200: {
       description: 'Successful response',
-      type: 'object',
-       properties: {
+      schema: {
+        type: 'object',
+        properties: {
           status: {
             type: 'string',
             description: 'HTTP status code',
@@ -238,12 +239,25 @@ export const update<%= h.capitalize(name)%>Schema = {
               },
               description: {
                 type: 'string',
-                description: 'Description of the <%= name%> to update',
+                description: 'Name of the <%= name%> to update',
                 example: 'John Doe is smart',
               },
             },
           },
         },
+      },
+    },
+    404: {
+      description: 'Product not found',
+      schema: {
+        type: 'object',
+        properties: {
+          error: {
+            type: 'string',
+            description: 'Error message',
+          },
+        },
+      },
     },
   },
 };
