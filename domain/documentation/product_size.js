@@ -1,7 +1,7 @@
-export const addPersonSchema = {
-  description: 'Create a new Person',
-  tags: ['Person'],
-  summary: 'Creates new Person with given values',
+export const addProduct_sizeSchema = {
+  description: 'Create a new Product_size',
+  tags: ['Product_size'],
+  summary: 'Creates new Product_size with given values',
   params: {
     type: 'object',
     properties: {
@@ -15,15 +15,15 @@ export const addPersonSchema = {
   body: {
     type: 'object',
      properties:{
-      name: {
-        type: 'string',
-        description: 'Name of the person to add',
-        example: 'John Doe',
+      product_id: {
+        type: 'integer',
+        description: 'product_id of the product_size to add',
+        example: 5223,
       },
-      description: {
-        type: 'string',
-        description: 'Description of the person to add',
-        example: 'John Doe is smart',
+      size_id: {
+        type: 'integer',
+        description: 'product_id of the product_size to add',
+        example:523,
       },
     }, 
   },
@@ -40,10 +40,15 @@ export const addPersonSchema = {
           data: {
             type: 'object',
             properties: {
-              name: {
+              product_id: {
                 type: 'string',
-                description: 'Name of the added person',
-                example: 'John Doe',
+                description: 'product_id of the added product_size',
+                example: 252,
+              },
+              size_id: {
+                type: 'string',
+                description: 'size_id of the added product_size',
+                example: 22,
               },
             },
           },
@@ -64,10 +69,10 @@ export const addPersonSchema = {
     },
   },
 };
-export const getPersonSchema = {
-  description: 'Get a Person',
-  tags: ['Person'],
-  summary: 'Get all Persons',
+export const getProduct_sizeSchema = {
+  description: 'Get a Product_size',
+  tags: ['Product_size'],
+  summary: 'Get all Product_sizes',
   params: {
     type: 'object',
     properties: {
@@ -92,15 +97,15 @@ export const getPersonSchema = {
           data: {
             type: 'object',
             properties: {
-              name: {
-                type: 'string',
-                description: 'Name of the person',
-                example: 'John Doe',
+              product_id: {
+                type: 'integer',
+                description: 'product_id of the product_size',
+                example: 1,
               },
-              description: {
-                type: 'string',
-                description: 'Description of the person to get',
-                example: 'John Doe is smart',
+              size_id: {
+                type: 'integer',
+                description: 'size_id of the product_size to get',
+                example: 1,
               },
             },
           },
@@ -108,7 +113,7 @@ export const getPersonSchema = {
       },
     },
     404: {
-      description: 'Person not found',
+      description: 'Product_size not found',
       schema: {
         type: 'object',
         properties: {
@@ -122,10 +127,10 @@ export const getPersonSchema = {
   },
 }
 
-export const getPersonByIdSchema = {
- description: 'Get a Person by ID',
-  tags: ['Person'],
-  summary: 'Retrieve a Person by ID',
+export const getProduct_sizeByIdSchema = {
+ description: 'Get a Product_size by ID',
+  tags: ['Product_size'],
+  summary: 'Retrieve a Product_size by ID',
   params: {
     type: 'object',
     properties: {
@@ -136,7 +141,7 @@ export const getPersonByIdSchema = {
       },
       id: {
         type: 'string',
-        description: 'ID of the person to retrieve',
+        description: 'ID of the product_size to retrieve',
         example: 1,
       },
     },
@@ -155,15 +160,15 @@ export const getPersonByIdSchema = {
           data: {
             type: 'object',
             properties: {
-              name: {
+              product_id: {
                 type: 'string',
-                description: 'Name of the person',
-                example: 'John Doe',
+                description: 'product_id of the product_size',
+                example: 1,
               },
-              description: {
-                type: 'string',
-                description: 'Name of the person to get',
-                example: 'John Doe is smart',
+              size_id: {
+                type: 'integer',
+                description: 'size_id of the product_size to get',
+                example: 2,
               },
             },
           },
@@ -171,7 +176,7 @@ export const getPersonByIdSchema = {
       },
     },
     404: {
-      description: 'Person not found',
+      description: 'Product_size not found',
       schema: {
         type: 'object',
         properties: {
@@ -184,22 +189,22 @@ export const getPersonByIdSchema = {
     },
   },
 };
-export const updatePersonSchema = {
-  description: 'update a Person',
-  tags: ['Person'],
-  summary: 'Update Person with given values',
+export const updateProduct_sizeSchema = {
+  description: 'update a Product_size',
+  tags: ['Product_size'],
+  summary: 'Update Product_size with given values',
   body: {
     type: 'object',
     properties:{
-      name: {
-        type: 'string',
-        description: 'Name of the person to update',
-        example: 'John Doe',
+      product_id: {
+        type: 'integer',
+        description: 'product_id of the product_size to update',
+        example: 5,
       },
-      description: {
-        type: 'string',
-        description: 'Description of the person to update',
-        example: 'John Doe is smart',
+      size_id: {
+        type: 'integer',
+        description: 'size_id of the product_size to update',
+        example: 1,
       },
     }, 
   },
@@ -212,7 +217,7 @@ export const updatePersonSchema = {
       },
       id: {
         type: 'string',
-        description: 'Person id',
+        description: 'Product_size id',
       },
     },
   },
@@ -229,15 +234,15 @@ export const updatePersonSchema = {
           data: {
             type: 'object',
             properties: {
-              name: {
-                type: 'string',
-                description: 'Name of the person',
-                example: 'John Doe',
+              product_id: {
+                type: 'integer',
+                description: 'product_id of the product_size',
+                example: 5,
               },
-              description: {
-                type: 'string',
-                description: 'Name of the person to update',
-                example: 'John Doe is smart',
+              size_id: {
+                type: 'integer',
+                description: 'size_id of the product_size to update',
+                example: 5,
               },
             },
           },
@@ -245,7 +250,7 @@ export const updatePersonSchema = {
       },
     },
     404: {
-      description: 'Product not found',
+      description: 'Product_size not found',
       schema: {
         type: 'object',
         properties: {
@@ -259,10 +264,10 @@ export const updatePersonSchema = {
   },
 };
 
-export const deletePersonSchema = {
-  description: 'Delete a Person',
-  tags: ['Person'],
-  summary: 'Delete a Person by ID',
+export const deleteProduct_sizeSchema = {
+  description: 'Delete a Product_size',
+  tags: ['Product_size'],
+  summary: 'Delete a Product_size by ID',
   params: {
     type: 'object',
     properties: {
@@ -273,7 +278,7 @@ export const deletePersonSchema = {
       },
       id: {
         type: 'string',
-        description: 'ID of the person to delete',
+        description: 'ID of the product_size to delete',
         example: 1,
       },
     },
@@ -297,7 +302,7 @@ export const deletePersonSchema = {
       },
     },
     404: {
-      description: 'Person not found',
+      description: 'Product_size not found',
       schema: {
         type: 'object',
         properties: {
@@ -311,6 +316,6 @@ export const deletePersonSchema = {
   },
 };
 
-export default { addPersonSchema, getPersonSchema, getPersonByIdSchema, updatePersonSchema, deletePersonSchema };
+export default { addProduct_sizeSchema, getProduct_sizeSchema, getProduct_sizeByIdSchema, updateProduct_sizeSchema, deleteProduct_sizeSchema };
 
 

@@ -6,11 +6,10 @@
 export const up = async (knex) => {
   // await knex.raw('CREATE EXTENSION IF NOT EXISTS "uuid-ossp"');
   try {
-    await knex.schema.createTable('person', (table) => {
-      table.increments();
-      table.string('name');
-      table.string('description');
-      table.timestamps(true, true, false);
+    await knex.schema.createTable('sizes', (table) => {
+      table.increments('id').primary();
+      table.string('size');
+      table.timestamps(true, true);
     });
   } catch (err) {
     console.log('err :>> ', err);
@@ -23,6 +22,6 @@ export const up = async (knex) => {
  * @returns
  */
 export const down = (knex) => {
-  return knex.schema.dropTable('person');
+  return knex.schema.dropTable('sizes');
 };
 

@@ -1,10 +1,7 @@
----
-to: domain/documentation/<%= name%>.js
----
-export const add<%= h.capitalize(name)%>Schema = {
-  description: 'Create a new <%= h.capitalize(name)%>',
-  tags: ['<%= h.capitalize(name)%>'],
-  summary: 'Creates new <%= h.capitalize(name)%> with given values',
+export const addMaterialSchema = {
+  description: 'Create a new Material',
+  tags: ['Material'],
+  summary: 'Creates new Material with given values',
   params: {
     type: 'object',
     properties: {
@@ -18,15 +15,15 @@ export const add<%= h.capitalize(name)%>Schema = {
   body: {
     type: 'object',
      properties:{
-      name: {
-        type: 'string',
-        description: 'Name of the <%= name%> to add',
-        example: 'John Doe',
+      type_id: {
+        type: 'integer',
+        description: 'type_id of the material to add',
+        example: 2,
       },
-      description: {
+      composition: {
         type: 'string',
-        description: 'Description of the <%= name%> to add',
-        example: 'John Doe is smart',
+        description: 'composition of the material to add',
+        example: ' 20 % coton',
       },
     }, 
   },
@@ -43,15 +40,15 @@ export const add<%= h.capitalize(name)%>Schema = {
           data: {
             type: 'object',
             properties: {
-              name: {
-                type: 'string',
-                description: 'Name of the added <%= name%>',
-                example: 'John Doe',
+              type_id: {
+                type: 'integer',
+                description: 'type_id of the added material',
+                example: 2,
               },
-              description: {
+              composition: {
                 type: 'string',
-                description: 'description of the added <%= name%>',
-                example: 'John Doe is smart',
+                description: 'composition of the added material',
+                example: 2,
               },
             },
           },
@@ -72,10 +69,10 @@ export const add<%= h.capitalize(name)%>Schema = {
     },
   },
 };
-export const get<%= h.capitalize(name)%>Schema = {
-  description: 'Get a <%= h.capitalize(name)%>',
-  tags: ['<%= h.capitalize(name)%>'],
-  summary: 'Get all <%= h.capitalize(name)%>s',
+export const getMaterialSchema = {
+  description: 'Get a Material',
+  tags: ['Material'],
+  summary: 'Get all Materials',
   params: {
     type: 'object',
     properties: {
@@ -100,15 +97,15 @@ export const get<%= h.capitalize(name)%>Schema = {
           data: {
             type: 'object',
             properties: {
-              name: {
-                type: 'string',
-                description: 'Name of the <%= name%>',
-                example: 'John Doe',
+              type_id: {
+                type: 'integer',
+                description: 'type_id of the material',
+                example: 2,
               },
-              description: {
+              composition: {
                 type: 'string',
-                description: 'Description of the <%= name%> to get',
-                example: 'John Doe is smart',
+                description: 'composition of the material to get',
+                example: '20% coton',
               },
             },
           },
@@ -116,7 +113,7 @@ export const get<%= h.capitalize(name)%>Schema = {
       },
     },
     404: {
-      description: '<%= h.capitalize(name)%> not found',
+      description: 'Material not found',
       schema: {
         type: 'object',
         properties: {
@@ -130,10 +127,10 @@ export const get<%= h.capitalize(name)%>Schema = {
   },
 }
 
-export const get<%= h.capitalize(name)%>ByIdSchema = {
-  description: 'Get a <%= h.capitalize(name)%> by ID',
-  tags: ['<%= h.capitalize(name)%>'],
-  summary: 'Retrieve a <%= h.capitalize(name)%> by ID',
+export const getMaterialByIdSchema = {
+  description: 'Get a Material by ID',
+  tags: ['Material'],
+  summary: 'Retrieve a Material by ID',
   params: {
     type: 'object',
     properties: {
@@ -144,7 +141,7 @@ export const get<%= h.capitalize(name)%>ByIdSchema = {
       },
       id: {
         type: 'string',
-        description: 'ID of the <%= name%> to retrieve',
+        description: 'ID of the material to retrieve',
         example: 1,
       },
     },
@@ -163,15 +160,15 @@ export const get<%= h.capitalize(name)%>ByIdSchema = {
           data: {
             type: 'object',
             properties: {
-              name: {
-                type: 'string',
-                description: 'Name of the <%= name%>',
-                example: 'John Doe',
+              type_id: {
+                type: 'integer',
+                description: 'type_id of the material',
+                example: 2,
               },
-              description: {
+              composition: {
                 type: 'string',
-                description: 'Name of the <%= name%> to get',
-                example: 'John Doe is smart',
+                description: 'composition of the material to get',
+                example: '20% coton',
               },
             },
           },
@@ -179,7 +176,7 @@ export const get<%= h.capitalize(name)%>ByIdSchema = {
       },
     },
     404: {
-      description: '<%= h.capitalize(name)%> not found',
+      description: 'Material not found',
       schema: {
         type: 'object',
         properties: {
@@ -192,22 +189,22 @@ export const get<%= h.capitalize(name)%>ByIdSchema = {
     },
   },
 };
-export const update<%= h.capitalize(name)%>Schema = {
-  description: 'update a <%= h.capitalize(name)%>',
-  tags: ['<%= h.capitalize(name)%>'],
-  summary: 'Update <%= h.capitalize(name)%> with given values',
+export const updateMaterialSchema = {
+  description: 'update a Material',
+  tags: ['Material'],
+  summary: 'Update Material with given values',
   body: {
     type: 'object',
     properties:{
-      name: {
-        type: 'string',
-        description: 'Name of the <%= name%> to update',
-        example: 'John Doe',
+      type_id: {
+        type: 'integer',
+        description: 'type_id of the material to update',
+        example: 2,
       },
-      description: {
+      composition: {
         type: 'string',
-        description: 'Description of the <%= name%> to update',
-        example: 'John Doe is smart',
+        description: 'composition of the material to update',
+        example: '20% coton',
       },
     }, 
   },
@@ -220,7 +217,7 @@ export const update<%= h.capitalize(name)%>Schema = {
       },
       id: {
         type: 'string',
-        description: '<%= h.capitalize(name)%> id',
+        description: 'Material id',
       },
     },
   },
@@ -237,15 +234,15 @@ export const update<%= h.capitalize(name)%>Schema = {
           data: {
             type: 'object',
             properties: {
-              name: {
-                type: 'string',
-                description: 'Name of the <%= name%>',
-                example: 'John Doe',
+              type_id: {
+                type: 'integer',
+                description: 'type of the material',
+                example: 2,
               },
-              description: {
+              composition: {
                 type: 'string',
-                description: 'Name of the <%= name%> to update',
-                example: 'John Doe is smart',
+                description: 'composition of the material to update',
+                example: '20% coton',
               },
             },
           },
@@ -253,7 +250,7 @@ export const update<%= h.capitalize(name)%>Schema = {
       },
     },
     404: {
-      description: '<%= h.capitalize(name)%> not found',
+      description: 'Material not found',
       schema: {
         type: 'object',
         properties: {
@@ -267,10 +264,10 @@ export const update<%= h.capitalize(name)%>Schema = {
   },
 };
 
-export const delete<%= h.capitalize(name)%>Schema = {
-  description: 'Delete a <%= h.capitalize(name)%>',
-  tags: ['<%= h.capitalize(name)%>'],
-  summary: 'Delete a <%= h.capitalize(name)%> by ID',
+export const deleteMaterialSchema = {
+  description: 'Delete a Material',
+  tags: ['Material'],
+  summary: 'Delete a Material by ID',
   params: {
     type: 'object',
     properties: {
@@ -281,7 +278,7 @@ export const delete<%= h.capitalize(name)%>Schema = {
       },
       id: {
         type: 'string',
-        description: 'ID of the <%= name%> to delete',
+        description: 'ID of the material to delete',
         example: 1,
       },
     },
@@ -305,7 +302,7 @@ export const delete<%= h.capitalize(name)%>Schema = {
       },
     },
     404: {
-      description: '<%= h.capitalize(name)%> not found',
+      description: 'Material not found',
       schema: {
         type: 'object',
         properties: {
@@ -319,6 +316,6 @@ export const delete<%= h.capitalize(name)%>Schema = {
   },
 };
 
-export default { add<%= h.capitalize(name)%>Schema, get<%= h.capitalize(name)%>Schema, get<%= h.capitalize(name)%>ByIdSchema, update<%= h.capitalize(name)%>Schema, delete<%= h.capitalize(name)%>Schema };
+export default { addMaterialSchema, getMaterialSchema, getMaterialByIdSchema, updateMaterialSchema, deleteMaterialSchema };
 
 

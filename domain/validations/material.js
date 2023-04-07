@@ -1,13 +1,13 @@
 import validators from '../utils/validators';
-import * as personService from '../services';
+import * as materialService from '../services';
 
 import { ValidationError } from '../utils/Errors';
 
 /**
- * @function validateAndGetPerson
+ * @function validateAndGetMaterial
  */
 
-export const validateAndGetPersons = async ({ clientId }, knex) => {
+export const validateAndGetMaterials = async ({ clientId }, knex) => {
   const errors = {};
 
   const errorMessage = validators.isString(clientId, {
@@ -22,25 +22,25 @@ export const validateAndGetPersons = async ({ clientId }, knex) => {
   if (!validators.isEmptyObject(errors)) {
     return Promise.reject(
       new ValidationError({
-        name: 'Person',
+        name: 'Material',
         status: 400,
-        code: 'invalid_get_Person',
-        message: `Invalid get Person input data ${JSON.stringify(errors)}`,
-        debugMessage: '[Person] Error in getPersonById.',
+        code: 'invalid_get_Material',
+        message: `Invalid get Material input data ${JSON.stringify(errors)}`,
+        debugMessage: '[Material] Error in getMaterialById.',
         error: errors,
       })
     );
   }
 
-  const data = await personService.getPersons(knex);
+  const data = await materialService.getMaterials(knex);
   return data;
 };
 
 /**
- * @function validateAndGetByIdPerson
+ * @function validateAndGetByIdMaterial
  */
 
-export const validateAndGetByIdPerson = ({ id, clientId }, knex) => {
+export const validateAndGetByIdMaterial = ({ id, clientId }, knex) => {
   const errors = {};
 
   let errorMessage = validators.isString(id, {
@@ -63,25 +63,25 @@ export const validateAndGetByIdPerson = ({ id, clientId }, knex) => {
   if (!validators.isEmptyObject(errors)) {
     return Promise.reject(
       new ValidationError({
-        name: 'Person',
+        name: 'Material',
         status: 400,
-        code: 'invalid_get_Person',
-        message: `Invalid get Person input data ${JSON.stringify(errors)}`,
-        debugMessage: '[Person] Error in getPersonById.',
+        code: 'invalid_get_Material',
+        message: `Invalid get Material input data ${JSON.stringify(errors)}`,
+        debugMessage: '[Material] Error in getMaterialById.',
         error: errors,
       })
     );
   }
-  return personService.getPersonById({ id }, knex);
+  return materialService.getMaterialById({ id }, knex);
 };
 
 /**
- * @function validateAndAddPerson
+ * @function validateAndAddMaterial
  */
 
-export const validateAndAddPerson = ({clientId},body, knex) => {
+export const validateAndAddMaterial = ({clientId},body, knex) => {
   const errors = {};
-  let errorMessage = validators.isString(body.name, {
+  let errorMessage = validators.isPositiveInteger(body.type_id, {
     required: true,
     min: 1,
   });
@@ -97,27 +97,35 @@ export const validateAndAddPerson = ({clientId},body, knex) => {
   if (errorMessage !== null) {
     errors.clientId = errorMessage;
   }
+  errorMessage = validators.isString(body.composition, {
+    required: true,
+    min: 1,
+  });
+
+  if (errorMessage !== null) {
+    errors.composition = errorMessage;
+  }
 
   if (!validators.isEmptyObject(errors)) {
     return Promise.reject(
       new ValidationError({
-        name: 'Person',
+        name: 'Material',
         status: 400,
         code: 'invalid_create_',
-        message: `Invalid create Person input data ${JSON.stringify(errors)}`,
-        debugMessage: '[Person] Error in createPerson.',
+        message: `Invalid create Material input data ${JSON.stringify(errors)}`,
+        debugMessage: '[Material] Error in createMaterial.',
         error: errors,
       })
     );
   }
-  return personService.addPerson(body, knex);
+  return materialService.addMaterial(body, knex);
 };
 
 /**
- * @function validateAndUpdatePerson
+ * @function validateAndUpdateMaterial
  */
 
-export const validateAndUpdatePerson = ({ id, clientId }, body, knex) => {
+export const validateAndUpdateMaterial = ({ id, clientId }, body, knex) => {
   const errors = {};
 
    let errorMessage = validators.isString(id, {
@@ -128,13 +136,13 @@ export const validateAndUpdatePerson = ({ id, clientId }, body, knex) => {
     errors.id = errorMessage;
   }
 
-  if (body.name) {
-    errorMessage = validators.isString(body.name, {
+  if (body.type_id) {
+    errorMessage = validators.isPositiveInteger(body.type_id, {
       required: true,
       min: 1,
     });
     if (errorMessage !== null) {
-      errors.name = errorMessage;
+      errors.type_id = errorMessage;
     }
   }
   errorMessage = validators.isString(clientId, {
@@ -149,26 +157,26 @@ export const validateAndUpdatePerson = ({ id, clientId }, body, knex) => {
   if (!validators.isEmptyObject(errors)) {
     return Promise.reject(
       new ValidationError({
-        name: 'Person',
+        name: 'Material',
         status: 400,
-        code: 'invalid_update_Person',
-        message: `Invalid update Person input data ${JSON.stringify(errors)}`,
-        debugMessage: '[Person] Error in updatePerson.',
+        code: 'invalid_update_Material',
+        message: `Invalid update Material input data ${JSON.stringify(errors)}`,
+        debugMessage: '[Material] Error in updateMaterial.',
         error: errors,
       })
     );
   }
 
-  return personService.updatePerson({ id }, body, knex);
+  return materialService.updateMaterial({ id }, body, knex);
 };
 
 /**
- * @function validateAndDeletePerson
+ * @function validateAndDeleteMaterial
  */
 
-export const validateAndDeletePerson = ({ id, clientId }, knex) => {
+export const validateAndDeleteMaterial = ({ id, clientId }, knex) => {
   const errors = {};
-   let errorMessage = validators.isPositiveInteger(id, {
+   let errorMessage = validators.isString(id, {
     required: true,
   });
 
@@ -185,16 +193,16 @@ export const validateAndDeletePerson = ({ id, clientId }, knex) => {
     errors.id = errorMessage;
     return Promise.reject(
       new ValidationError({
-        name: 'Person',
+        name: 'Material',
         status: 400,
-        code: 'invalid_delete_Person',
-        message: `Invalid get Person input data ${JSON.stringify(errors)}`,
-        debugMessage: '[Person] Error in deletePerson.',
+        code: 'invalid_delete_Material',
+        message: `Invalid get Material input data ${JSON.stringify(errors)}`,
+        debugMessage: '[Material] Error in deleteMaterial.',
         error: errors,
       })
     );
   }
-  return personService.deletePerson({ id }, knex);
+  return materialService.deleteMaterial({ id }, knex);
 };
-export default { validateAndGetPersons, validateAndUpdatePerson, validateAndDeletePerson, validateAndGetByIdPerson };
+export default { validateAndGetMaterials, validateAndUpdateMaterial, validateAndDeleteMaterial, validateAndGetByIdMaterial };
 

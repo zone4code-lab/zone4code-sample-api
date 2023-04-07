@@ -172,7 +172,7 @@ export const validateAndUpdate<%= h.capitalize(name)%> = ({ id, clientId }, body
 
 export const validateAndDelete<%= h.capitalize(name)%> = ({ id, clientId }, knex) => {
   const errors = {};
-   let errorMessage = validators.isPositiveInteger(id, {
+   let errorMessage = validators.isString(id, {
     required: true,
   });
 

@@ -1,10 +1,7 @@
----
-to: domain/documentation/<%= name%>.js
----
-export const add<%= h.capitalize(name)%>Schema = {
-  description: 'Create a new <%= h.capitalize(name)%>',
-  tags: ['<%= h.capitalize(name)%>'],
-  summary: 'Creates new <%= h.capitalize(name)%> with given values',
+export const addColorSchema = {
+  description: 'Create a new Color',
+  tags: ['Color'],
+  summary: 'Creates new Color with given values',
   params: {
     type: 'object',
     properties: {
@@ -18,15 +15,15 @@ export const add<%= h.capitalize(name)%>Schema = {
   body: {
     type: 'object',
      properties:{
-      name: {
+      color: {
         type: 'string',
-        description: 'Name of the <%= name%> to add',
-        example: 'John Doe',
+        description: 'color of the color to add',
+        example: 'red',
       },
-      description: {
-        type: 'string',
-        description: 'Description of the <%= name%> to add',
-        example: 'John Doe is smart',
+      type_id: {
+        type: 'integer',
+        description: 'type_id of the color to add',
+        example: 525,
       },
     }, 
   },
@@ -43,15 +40,15 @@ export const add<%= h.capitalize(name)%>Schema = {
           data: {
             type: 'object',
             properties: {
-              name: {
+              color: {
                 type: 'string',
-                description: 'Name of the added <%= name%>',
-                example: 'John Doe',
+                description: 'color of the color to add',
+                example: 'red',
               },
-              description: {
-                type: 'string',
-                description: 'description of the added <%= name%>',
-                example: 'John Doe is smart',
+              type_id: {
+                type: 'integer',
+                description: 'type_id of the color to add',
+                example: 525,
               },
             },
           },
@@ -72,10 +69,10 @@ export const add<%= h.capitalize(name)%>Schema = {
     },
   },
 };
-export const get<%= h.capitalize(name)%>Schema = {
-  description: 'Get a <%= h.capitalize(name)%>',
-  tags: ['<%= h.capitalize(name)%>'],
-  summary: 'Get all <%= h.capitalize(name)%>s',
+export const getColorSchema = {
+  description: 'Get a Color',
+  tags: ['Color'],
+  summary: 'Get all Colors',
   params: {
     type: 'object',
     properties: {
@@ -100,15 +97,15 @@ export const get<%= h.capitalize(name)%>Schema = {
           data: {
             type: 'object',
             properties: {
-              name: {
+              color: {
                 type: 'string',
-                description: 'Name of the <%= name%>',
-                example: 'John Doe',
+                description: 'color of the color to get',
+                example: 'red',
               },
-              description: {
-                type: 'string',
-                description: 'Description of the <%= name%> to get',
-                example: 'John Doe is smart',
+              type_id: {
+                type: 'integer',
+                description: 'type_id of the color to get',
+                example: 525,
               },
             },
           },
@@ -116,7 +113,7 @@ export const get<%= h.capitalize(name)%>Schema = {
       },
     },
     404: {
-      description: '<%= h.capitalize(name)%> not found',
+      description: 'Color not found',
       schema: {
         type: 'object',
         properties: {
@@ -130,10 +127,10 @@ export const get<%= h.capitalize(name)%>Schema = {
   },
 }
 
-export const get<%= h.capitalize(name)%>ByIdSchema = {
-  description: 'Get a <%= h.capitalize(name)%> by ID',
-  tags: ['<%= h.capitalize(name)%>'],
-  summary: 'Retrieve a <%= h.capitalize(name)%> by ID',
+export const getColorByIdSchema = {
+ description: 'Get a Color by ID',
+  tags: ['Color'],
+  summary: 'Retrieve a Color by ID',
   params: {
     type: 'object',
     properties: {
@@ -144,7 +141,7 @@ export const get<%= h.capitalize(name)%>ByIdSchema = {
       },
       id: {
         type: 'string',
-        description: 'ID of the <%= name%> to retrieve',
+        description: 'ID of the color to retrieve',
         example: 1,
       },
     },
@@ -163,15 +160,15 @@ export const get<%= h.capitalize(name)%>ByIdSchema = {
           data: {
             type: 'object',
             properties: {
-              name: {
+              color: {
                 type: 'string',
-                description: 'Name of the <%= name%>',
-                example: 'John Doe',
+                description: 'color of the color',
+                example: 'red',
               },
-              description: {
-                type: 'string',
-                description: 'Name of the <%= name%> to get',
-                example: 'John Doe is smart',
+              type_id: {
+                type: 'integer',
+                description: 'type_id of the color',
+                example: 525,
               },
             },
           },
@@ -179,7 +176,7 @@ export const get<%= h.capitalize(name)%>ByIdSchema = {
       },
     },
     404: {
-      description: '<%= h.capitalize(name)%> not found',
+      description: 'Color not found',
       schema: {
         type: 'object',
         properties: {
@@ -192,22 +189,22 @@ export const get<%= h.capitalize(name)%>ByIdSchema = {
     },
   },
 };
-export const update<%= h.capitalize(name)%>Schema = {
-  description: 'update a <%= h.capitalize(name)%>',
-  tags: ['<%= h.capitalize(name)%>'],
-  summary: 'Update <%= h.capitalize(name)%> with given values',
+export const updateColorSchema = {
+  description: 'update a Color',
+  tags: ['Color'],
+  summary: 'Update Color with given values',
   body: {
     type: 'object',
     properties:{
-      name: {
+      color: {
         type: 'string',
-        description: 'Name of the <%= name%> to update',
-        example: 'John Doe',
+        description: 'color of the color to update',
+        example: 'red',
       },
-      description: {
-        type: 'string',
-        description: 'Description of the <%= name%> to update',
-        example: 'John Doe is smart',
+      type_id: {
+        type: 'integer',
+        description: 'type_id of the color to update',
+        example: 525,
       },
     }, 
   },
@@ -220,7 +217,7 @@ export const update<%= h.capitalize(name)%>Schema = {
       },
       id: {
         type: 'string',
-        description: '<%= h.capitalize(name)%> id',
+        description: 'Color id',
       },
     },
   },
@@ -239,12 +236,12 @@ export const update<%= h.capitalize(name)%>Schema = {
             properties: {
               name: {
                 type: 'string',
-                description: 'Name of the <%= name%>',
+                description: 'Name of the color',
                 example: 'John Doe',
               },
               description: {
                 type: 'string',
-                description: 'Name of the <%= name%> to update',
+                description: 'Name of the color to update',
                 example: 'John Doe is smart',
               },
             },
@@ -253,7 +250,7 @@ export const update<%= h.capitalize(name)%>Schema = {
       },
     },
     404: {
-      description: '<%= h.capitalize(name)%> not found',
+      description: 'Color not found',
       schema: {
         type: 'object',
         properties: {
@@ -267,10 +264,10 @@ export const update<%= h.capitalize(name)%>Schema = {
   },
 };
 
-export const delete<%= h.capitalize(name)%>Schema = {
-  description: 'Delete a <%= h.capitalize(name)%>',
-  tags: ['<%= h.capitalize(name)%>'],
-  summary: 'Delete a <%= h.capitalize(name)%> by ID',
+export const deleteColorSchema = {
+  description: 'Delete a Color',
+  tags: ['Color'],
+  summary: 'Delete a Color by ID',
   params: {
     type: 'object',
     properties: {
@@ -281,7 +278,7 @@ export const delete<%= h.capitalize(name)%>Schema = {
       },
       id: {
         type: 'string',
-        description: 'ID of the <%= name%> to delete',
+        description: 'ID of the color to delete',
         example: 1,
       },
     },
@@ -305,7 +302,7 @@ export const delete<%= h.capitalize(name)%>Schema = {
       },
     },
     404: {
-      description: '<%= h.capitalize(name)%> not found',
+      description: 'Color not found',
       schema: {
         type: 'object',
         properties: {
@@ -319,6 +316,6 @@ export const delete<%= h.capitalize(name)%>Schema = {
   },
 };
 
-export default { add<%= h.capitalize(name)%>Schema, get<%= h.capitalize(name)%>Schema, get<%= h.capitalize(name)%>ByIdSchema, update<%= h.capitalize(name)%>Schema, delete<%= h.capitalize(name)%>Schema };
+export default { addColorSchema, getColorSchema, getColorByIdSchema, updateColorSchema, deleteColorSchema };
 
 

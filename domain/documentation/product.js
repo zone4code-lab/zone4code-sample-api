@@ -1,10 +1,7 @@
----
-to: domain/documentation/<%= name%>.js
----
-export const add<%= h.capitalize(name)%>Schema = {
-  description: 'Create a new <%= h.capitalize(name)%>',
-  tags: ['<%= h.capitalize(name)%>'],
-  summary: 'Creates new <%= h.capitalize(name)%> with given values',
+export const addProductSchema = {
+  description: 'Create a new Product',
+  tags: ['Product'],
+  summary: 'Creates new Product with given values',
   params: {
     type: 'object',
     properties: {
@@ -20,13 +17,23 @@ export const add<%= h.capitalize(name)%>Schema = {
      properties:{
       name: {
         type: 'string',
-        description: 'Name of the <%= name%> to add',
+        description: 'Name of the product to add',
         example: 'John Doe',
       },
       description: {
         type: 'string',
-        description: 'Description of the <%= name%> to add',
+        description: 'Description of the product to add',
         example: 'John Doe is smart',
+      },
+      image: {
+        type: 'string',
+        description: 'id image of the product to add',
+        example: '152',
+      },
+      exclude_extra: {
+        type: 'boolean',
+        description: 'if the product to add does not have extra type true',
+        example: true,
       },
     }, 
   },
@@ -45,13 +52,23 @@ export const add<%= h.capitalize(name)%>Schema = {
             properties: {
               name: {
                 type: 'string',
-                description: 'Name of the added <%= name%>',
+                description: 'Name of the added product',
                 example: 'John Doe',
               },
               description: {
                 type: 'string',
-                description: 'description of the added <%= name%>',
-                example: 'John Doe is smart',
+                description: 'description of the added product',
+                example: 'John Doe',
+              },
+              image: {
+                type: 'string',
+                description: 'image of the added product',
+                example: '252',
+              },
+              exclude_extra: {
+                type: 'boolean',
+                description: 'exclude_extra of the added product',
+                example: false,
               },
             },
           },
@@ -72,10 +89,10 @@ export const add<%= h.capitalize(name)%>Schema = {
     },
   },
 };
-export const get<%= h.capitalize(name)%>Schema = {
-  description: 'Get a <%= h.capitalize(name)%>',
-  tags: ['<%= h.capitalize(name)%>'],
-  summary: 'Get all <%= h.capitalize(name)%>s',
+export const getProductSchema = {
+  description: 'Get a Product',
+  tags: ['Product'],
+  summary: 'Get all Products',
   params: {
     type: 'object',
     properties: {
@@ -102,13 +119,23 @@ export const get<%= h.capitalize(name)%>Schema = {
             properties: {
               name: {
                 type: 'string',
-                description: 'Name of the <%= name%>',
+                description: 'Name of the product',
                 example: 'John Doe',
               },
               description: {
                 type: 'string',
-                description: 'Description of the <%= name%> to get',
+                description: 'Description of the product to get',
                 example: 'John Doe is smart',
+              },
+              image: {
+                type: 'string',
+                description: 'image of the product to get',
+                example: '522',
+              },
+              exclude_extra: {
+                type: 'boolean',
+                description: 'exclude_extra of the product to get',
+                example: true,
               },
             },
           },
@@ -116,7 +143,7 @@ export const get<%= h.capitalize(name)%>Schema = {
       },
     },
     404: {
-      description: '<%= h.capitalize(name)%> not found',
+      description: 'Product not found',
       schema: {
         type: 'object',
         properties: {
@@ -130,10 +157,10 @@ export const get<%= h.capitalize(name)%>Schema = {
   },
 }
 
-export const get<%= h.capitalize(name)%>ByIdSchema = {
-  description: 'Get a <%= h.capitalize(name)%> by ID',
-  tags: ['<%= h.capitalize(name)%>'],
-  summary: 'Retrieve a <%= h.capitalize(name)%> by ID',
+export const getProductByIdSchema = {
+ description: 'Get a Product by ID',
+  tags: ['Product'],
+  summary: 'Retrieve a Product by ID',
   params: {
     type: 'object',
     properties: {
@@ -144,7 +171,7 @@ export const get<%= h.capitalize(name)%>ByIdSchema = {
       },
       id: {
         type: 'string',
-        description: 'ID of the <%= name%> to retrieve',
+        description: 'ID of the product to retrieve',
         example: 1,
       },
     },
@@ -165,13 +192,23 @@ export const get<%= h.capitalize(name)%>ByIdSchema = {
             properties: {
               name: {
                 type: 'string',
-                description: 'Name of the <%= name%>',
+                description: 'Name of the product',
                 example: 'John Doe',
               },
               description: {
                 type: 'string',
-                description: 'Name of the <%= name%> to get',
+                description: 'Name of the product to get',
                 example: 'John Doe is smart',
+              },
+              image: {
+                type: 'string',
+                description: 'image of the product to get',
+                example: '525',
+              },
+              exclude_extra: {
+                type: 'boolean',
+                description: 'exclude_extra of the product to get',
+                example: false,
               },
             },
           },
@@ -179,7 +216,7 @@ export const get<%= h.capitalize(name)%>ByIdSchema = {
       },
     },
     404: {
-      description: '<%= h.capitalize(name)%> not found',
+      description: 'Product not found',
       schema: {
         type: 'object',
         properties: {
@@ -192,22 +229,32 @@ export const get<%= h.capitalize(name)%>ByIdSchema = {
     },
   },
 };
-export const update<%= h.capitalize(name)%>Schema = {
-  description: 'update a <%= h.capitalize(name)%>',
-  tags: ['<%= h.capitalize(name)%>'],
-  summary: 'Update <%= h.capitalize(name)%> with given values',
+export const updateProductSchema = {
+  description: 'update a Product',
+  tags: ['Product'],
+  summary: 'Update Product with given values',
   body: {
     type: 'object',
     properties:{
       name: {
         type: 'string',
-        description: 'Name of the <%= name%> to update',
+        description: 'Name of the product to update',
         example: 'John Doe',
       },
       description: {
         type: 'string',
-        description: 'Description of the <%= name%> to update',
+        description: 'Description of the product to update',
         example: 'John Doe is smart',
+      },
+      image: {
+        type: 'string',
+        description: 'image of the product to update',
+        example: '522',
+      },
+      exclude_extra: {
+        type: 'boolean',
+        description: 'exclude_extra of the product to update',
+        example: true,
       },
     }, 
   },
@@ -220,7 +267,7 @@ export const update<%= h.capitalize(name)%>Schema = {
       },
       id: {
         type: 'string',
-        description: '<%= h.capitalize(name)%> id',
+        description: 'Product id',
       },
     },
   },
@@ -239,13 +286,23 @@ export const update<%= h.capitalize(name)%>Schema = {
             properties: {
               name: {
                 type: 'string',
-                description: 'Name of the <%= name%>',
+                description: 'Name of the product',
                 example: 'John Doe',
               },
               description: {
                 type: 'string',
-                description: 'Name of the <%= name%> to update',
+                description: 'Name of the product to update',
                 example: 'John Doe is smart',
+              },
+              image: {
+                type: 'string',
+                description: 'image of the product to update',
+                example: '525',
+              },
+              exclude_extra: {
+                type: 'boolean',
+                description: 'exclude_extra of the product to update',
+                example:false,
               },
             },
           },
@@ -253,7 +310,7 @@ export const update<%= h.capitalize(name)%>Schema = {
       },
     },
     404: {
-      description: '<%= h.capitalize(name)%> not found',
+      description: 'Product not found',
       schema: {
         type: 'object',
         properties: {
@@ -267,10 +324,10 @@ export const update<%= h.capitalize(name)%>Schema = {
   },
 };
 
-export const delete<%= h.capitalize(name)%>Schema = {
-  description: 'Delete a <%= h.capitalize(name)%>',
-  tags: ['<%= h.capitalize(name)%>'],
-  summary: 'Delete a <%= h.capitalize(name)%> by ID',
+export const deleteProductSchema = {
+  description: 'Delete a Product',
+  tags: ['Product'],
+  summary: 'Delete a Product by ID',
   params: {
     type: 'object',
     properties: {
@@ -281,7 +338,7 @@ export const delete<%= h.capitalize(name)%>Schema = {
       },
       id: {
         type: 'string',
-        description: 'ID of the <%= name%> to delete',
+        description: 'ID of the product to delete',
         example: 1,
       },
     },
@@ -305,7 +362,7 @@ export const delete<%= h.capitalize(name)%>Schema = {
       },
     },
     404: {
-      description: '<%= h.capitalize(name)%> not found',
+      description: 'Product not found',
       schema: {
         type: 'object',
         properties: {
@@ -319,6 +376,6 @@ export const delete<%= h.capitalize(name)%>Schema = {
   },
 };
 
-export default { add<%= h.capitalize(name)%>Schema, get<%= h.capitalize(name)%>Schema, get<%= h.capitalize(name)%>ByIdSchema, update<%= h.capitalize(name)%>Schema, delete<%= h.capitalize(name)%>Schema };
+export default { addProductSchema, getProductSchema, getProductByIdSchema, updateProductSchema, deleteProductSchema };
 
 

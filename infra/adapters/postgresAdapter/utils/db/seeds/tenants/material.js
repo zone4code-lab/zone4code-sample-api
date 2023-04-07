@@ -1,10 +1,10 @@
 export const seed = function (knex, Promise) {
   // Deletes ALL existing entries
-  return knex('person')
+  return knex('material')
     .del()
     .then(function () {
       // Inserts seed entries
-      return knex('person').insert([
+      return knex('material').insert([
         {
           id: 1,
           name: 'data',
