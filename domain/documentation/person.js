@@ -45,6 +45,11 @@ export const addPersonSchema = {
                 description: 'Name of the added person',
                 example: 'John Doe',
               },
+              description: {
+                type: 'string',
+                description: 'description of the added person',
+                example: 'John Doe is smart',
+              },
             },
           },
         },
@@ -123,7 +128,7 @@ export const getPersonSchema = {
 }
 
 export const getPersonByIdSchema = {
- description: 'Get a Person by ID',
+  description: 'Get a Person by ID',
   tags: ['Person'],
   summary: 'Retrieve a Person by ID',
   params: {
@@ -245,7 +250,7 @@ export const updatePersonSchema = {
       },
     },
     404: {
-      description: 'Product not found',
+      description: 'Person not found',
       schema: {
         type: 'object',
         properties: {

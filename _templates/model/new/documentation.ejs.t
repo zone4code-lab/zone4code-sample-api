@@ -48,6 +48,11 @@ export const add<%= h.capitalize(name)%>Schema = {
                 description: 'Name of the added <%= name%>',
                 example: 'John Doe',
               },
+              description: {
+                type: 'string',
+                description: 'description of the added <%= name%>',
+                example: 'John Doe is smart',
+              },
             },
           },
         },
@@ -126,7 +131,7 @@ export const get<%= h.capitalize(name)%>Schema = {
 }
 
 export const get<%= h.capitalize(name)%>ByIdSchema = {
- description: 'Get a <%= h.capitalize(name)%> by ID',
+  description: 'Get a <%= h.capitalize(name)%> by ID',
   tags: ['<%= h.capitalize(name)%>'],
   summary: 'Retrieve a <%= h.capitalize(name)%> by ID',
   params: {
@@ -248,7 +253,7 @@ export const update<%= h.capitalize(name)%>Schema = {
       },
     },
     404: {
-      description: 'Product not found',
+      description: '<%= h.capitalize(name)%> not found',
       schema: {
         type: 'object',
         properties: {
