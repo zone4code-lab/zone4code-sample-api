@@ -13,7 +13,7 @@ export const config = nconf
   })
   .file(envVariables, {
     file: `${envVariables}.json`,
-    dir: `C:/Users/Farah/zone4code-sample-api/config/env`,
+    dir: `${__dirname}/config/env`,
     search: true,
     type: 'json',
     logicalSeparator: '.',

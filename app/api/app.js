@@ -9,8 +9,6 @@ import path from 'path';
 import fastifySwagger from 'fastify-swagger';
 import multipart from '@fastify/multipart';
 
-
-
 import dbConfig from '../../infra/adapters/postgresAdapter/utils/db/DatabaseConfig';
 
 import { i18nConfig } from '../../config/appSetting';
@@ -75,7 +73,7 @@ function build() {
   function getKnexForRequest(req, knexCache) {
     // If you pass the tenantIs a query parameter, you would do something
     // like this.
-    let tenantId = req.params?.clientId;
+    let tenantId = req.params.clientId;
     let knex = knexCache.get(tenantId);
 
     if (!knex) {

@@ -18,7 +18,7 @@
     "postgres": {
       "POSTGRES_USERNAME": "postgres",
       "POSTGRES_SECONDARY_USERNAME": "postgres",
-      "POSTGRES_PASSWORD": "farah",
+      "POSTGRES_PASSWORD": "",
       "POSTGRES_HOST": "localhost",
       "POSTGRES_PORT": 5432,
       "POSTGRES_DATABASE": "groupado"
