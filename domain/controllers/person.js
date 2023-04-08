@@ -1,30 +1,27 @@
 import * as validatePerson from '../validations';
-import * as personRepository from '../../infra/adapters/postgresAdapter/repositories';
+
 export const getPersons = async (req) => {
-  const Person = await personRepository.listPersons(req.knex);
-  //console.log('Person :>> ', Person);
-  //validatePerson.validateAndGetPersons(req.params);
+  const Person = await validatePerson.validateAndGetPersons(req.params, req.knex);
   return Person;
 };
 
 export const getPersonById = async (req) => {
-  const singlePerson = await validatePerson.validateAndGetByIdPerson(req.params);
+  const singlePerson = await validatePerson.validateAndGetByIdPerson(req.params, req.knex);
   return singlePerson;
 };
 
 export const addPerson = async (req) => {
-  console.log('alooooo :>> ');
-  const addPerson = await personRepository.addPerson(req.body, req.knex);
+  const addPerson = await validatePerson.validateAndAddPerson(req.params, req.body, req.knex);
   return addPerson;
 };
 
 export const updatePerson = async (req) => {
-  const editPerson = await validatePerson.validateAndUpdatePerson(req.params, req.body);
+  const editPerson = await validatePerson.validateAndUpdatePerson(req.params, req.body, req.knex);
   return editPerson;
 };
 
 export const deletePerson = async (req) => {
-  const deletePerson = await validatePerson.validateAndDeletePerson(req.params);
+  const deletePerson = await validatePerson.validateAndDeletePerson(req.params, req.knex);
   return deletePerson;
 };
 

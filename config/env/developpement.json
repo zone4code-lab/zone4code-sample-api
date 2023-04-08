@@ -1,13 +1,13 @@
 {
   "info": {
-    "name": "BLSM Template backend",
+    "name": "zone4code Template backend",
     "Version": "0.0.1",
     "env": "development"
   },
   "DB": {
     "mongodb": {
       "BASE_URL": "mongodb://localhost:27017",
-      "URL": "mongodb://localhost:27017/blsm",
+      "URL": "mongodb://localhost:27017/zone4code",
       "DB_TYPE": "mongodb",
       "DB_HOST": "127.0.0.1",
       "DB_PORT": 27017,
@@ -18,10 +18,10 @@
     "postgres": {
       "POSTGRES_USERNAME": "postgres",
       "POSTGRES_SECONDARY_USERNAME": "postgres",
-      "POSTGRES_PASSWORD": "",
+      "POSTGRES_PASSWORD": "farah",
       "POSTGRES_HOST": "localhost",
       "POSTGRES_PORT": 5432,
-      "POSTGRES_DATABASE": "novencia"
+      "POSTGRES_DATABASE": "groupado"
     }
   },
   "SYSTEM": {

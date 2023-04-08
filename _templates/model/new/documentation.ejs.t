@@ -1,32 +1,6 @@
 ---
 to: domain/documentation/<%= name%>.js
 ---
-
-import m2s from 'mongoose-to-swagger';
-
-import * as Models from '../../infra/adapters/mongoAdapter/schema';
-
-/* import { cleanProperties } from '../utils/helpers'; */
-
-export const cleanProperties = (data) => {
-  if (data.listId && data.html5InputType && data.fieldCategory && data.type) {
-    delete data.listId.required;
-    delete data.html5InputType;
-    delete data.fieldCategory;
-    delete data.type;
-    // delete data.description;
-  }
-  delete data.updatedAt;
-  delete data.createdAt;
-  // delete data.translate;
-  // delete data.parent;
-  // delete data._id;
-  // console.log('type of description  : ', typeof data.description.type);
-  return data;
-};
-
-const dynamicProperties = cleanProperties(m2s(Models.<%= h.capitalize(name)%>Model).properties);
-
 export const add<%= h.capitalize(name)%>Schema = {
   description: 'Create a new <%= h.capitalize(name)%>',
   tags: ['<%= h.capitalize(name)%>'],
@@ -36,71 +10,206 @@ export const add<%= h.capitalize(name)%>Schema = {
     properties: {
       clientId: {
         type: 'string',
-        description: 'clientId',
+        description: 'Name of the client',
+        example: 'novencia',
       },
     },
   },
   body: {
     type: 'object',
-    properties: dynamicProperties,
+     properties:{
+      name: {
+        type: 'string',
+        description: 'Name of the <%= name%> to add',
+        example: 'John Doe',
+      },
+      description: {
+        type: 'string',
+        description: 'Description of the <%= name%> to add',
+        example: 'John Doe is smart',
+      },
+    }, 
   },
-  response: {
+  responses: {
     200: {
       description: 'Successful response',
-      type: 'object',
-      properties: m2s(Models.<%= h.capitalize(name)%>Model).properties,
+      schema: {
+        type: 'object',
+        properties: {
+          status: {
+            type: 'string',
+            description: 'HTTP status code',
+          },
+          data: {
+            type: 'object',
+            properties: {
+              name: {
+                type: 'string',
+                description: 'Name of the added <%= name%>',
+                example: 'John Doe',
+              },
+              description: {
+                type: 'string',
+                description: 'description of the added <%= name%>',
+                example: 'John Doe is smart',
+              },
+            },
+          },
+        },
+      },
+    },
+    500: {
+      description: 'Internal Server Error',
+      schema: {
+        type: 'object',
+        properties: {
+          error: {
+            type: 'string',
+            description: 'Error message',
+          },
+        },
+      },
     },
   },
 };
-
 export const get<%= h.capitalize(name)%>Schema = {
   description: 'Get a <%= h.capitalize(name)%>',
   tags: ['<%= h.capitalize(name)%>'],
-  summary: 'Creates new <%= h.capitalize(name)%> with given values',
+  summary: 'Get all <%= h.capitalize(name)%>s',
   params: {
     type: 'object',
     properties: {
       clientId: {
         type: 'string',
-        description: 'clientId',
+        description: 'Name of the client',
+        example: 'novencia',
+      },
+    },
+    required: ['clientId'],
+  },
+  responses: {
+    200: {
+      description: 'Successful response',
+      schema: {
+        type: 'object',
+        properties: {
+          status: {
+            type: 'string',
+            description: 'HTTP status code',
+          },
+          data: {
+            type: 'object',
+            properties: {
+              name: {
+                type: 'string',
+                description: 'Name of the <%= name%>',
+                example: 'John Doe',
+              },
+              description: {
+                type: 'string',
+                description: 'Description of the <%= name%> to get',
+                example: 'John Doe is smart',
+              },
+            },
+          },
+        },
+      },
+    },
+    404: {
+      description: '<%= h.capitalize(name)%> not found',
+      schema: {
+        type: 'object',
+        properties: {
+          error: {
+            type: 'string',
+            description: 'Error message',
+          },
+        },
       },
     },
   },
-};
+}
 
 export const get<%= h.capitalize(name)%>ByIdSchema = {
-  description: 'Get a <%= h.capitalize(name)%>',
+  description: 'Get a <%= h.capitalize(name)%> by ID',
   tags: ['<%= h.capitalize(name)%>'],
-  summary: 'Creates new <%= h.capitalize(name)%> with given values',
+  summary: 'Retrieve a <%= h.capitalize(name)%> by ID',
   params: {
     type: 'object',
     properties: {
       clientId: {
         type: 'string',
-        description: 'clientId',
+        description: 'Name of the client',
+        example: 'novencia',
       },
       id: {
         type: 'string',
-        description: '<%= h.capitalize(name)%> id',
+        description: 'ID of the <%= name%> to retrieve',
+        example: 1,
+      },
+    },
+    required: ['clientId', 'id'],
+  },
+  responses: {
+    200: {
+      description: 'Successful response',
+      schema: {
+        type: 'object',
+        properties: {
+          status: {
+            type: 'string',
+            description: 'HTTP status code',
+          },
+          data: {
+            type: 'object',
+            properties: {
+              name: {
+                type: 'string',
+                description: 'Name of the <%= name%>',
+                example: 'John Doe',
+              },
+              description: {
+                type: 'string',
+                description: 'Name of the <%= name%> to get',
+                example: 'John Doe is smart',
+              },
+            },
+          },
+        },
+      },
+    },
+    404: {
+      description: '<%= h.capitalize(name)%> not found',
+      schema: {
+        type: 'object',
+        properties: {
+          error: {
+            type: 'string',
+            description: 'Error message',
+          },
+        },
       },
     },
   },
-  response: {
-    200: {
-      description: 'Successful response',
-      type: 'object',
-      properties: m2s(Models.<%= h.capitalize(name)%>Model).properties,
-    },
-  },
 };
-
 export const update<%= h.capitalize(name)%>Schema = {
   description: 'update a <%= h.capitalize(name)%>',
   tags: ['<%= h.capitalize(name)%>'],
   summary: 'Update <%= h.capitalize(name)%> with given values',
   body: {
     type: 'object',
-    properties: dynamicProperties,
+    properties:{
+      name: {
+        type: 'string',
+        description: 'Name of the <%= name%> to update',
+        example: 'John Doe',
+      },
+      description: {
+        type: 'string',
+        description: 'Description of the <%= name%> to update',
+        example: 'John Doe is smart',
+      },
+    }, 
   },
   params: {
     type: 'object',
@@ -115,36 +224,97 @@ export const update<%= h.capitalize(name)%>Schema = {
       },
     },
   },
-  response: {
+  responses: {
     200: {
       description: 'Successful response',
-      type: 'object',
-      properties: m2s(Models.<%= h.capitalize(name)%>Model).properties,
+      schema: {
+        type: 'object',
+        properties: {
+          status: {
+            type: 'string',
+            description: 'HTTP status code',
+          },
+          data: {
+            type: 'object',
+            properties: {
+              name: {
+                type: 'string',
+                description: 'Name of the <%= name%>',
+                example: 'John Doe',
+              },
+              description: {
+                type: 'string',
+                description: 'Name of the <%= name%> to update',
+                example: 'John Doe is smart',
+              },
+            },
+          },
+        },
+      },
+    },
+    404: {
+      description: '<%= h.capitalize(name)%> not found',
+      schema: {
+        type: 'object',
+        properties: {
+          error: {
+            type: 'string',
+            description: 'Error message',
+          },
+        },
+      },
     },
   },
 };
 
 export const delete<%= h.capitalize(name)%>Schema = {
-  description: 'delete a <%= h.capitalize(name)%>',
+  description: 'Delete a <%= h.capitalize(name)%>',
   tags: ['<%= h.capitalize(name)%>'],
-  summary: 'Update <%= h.capitalize(name)%> with given values',
+  summary: 'Delete a <%= h.capitalize(name)%> by ID',
   params: {
     type: 'object',
     properties: {
       clientId: {
         type: 'string',
-        description: 'clientId',
+        description: 'Name of the client',
+        example: 'novencia',
       },
       id: {
         type: 'string',
-        description: '<%= h.capitalize(name)%> id',
+        description: 'ID of the <%= name%> to delete',
+        example: 1,
       },
     },
+    required: ['clientId', 'id'],
   },
-  response: {
+  responses: {
     200: {
       description: 'Successful response',
-      type: 'boolean',
+      schema: {
+        type: 'object',
+        properties: {
+          status: {
+            type: 'string',
+            description: 'HTTP status code',
+          },
+          message: {
+            type: 'string',
+            description: 'Success message',
+          },
+        },
+      },
+    },
+    404: {
+      description: '<%= h.capitalize(name)%> not found',
+      schema: {
+        type: 'object',
+        properties: {
+          error: {
+            type: 'string',
+            description: 'Error message',
+          },
+        },
+      },
     },
   },
 };

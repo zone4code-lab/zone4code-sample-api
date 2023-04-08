@@ -9,7 +9,7 @@ import path from 'path';
 import fastifySwagger from 'fastify-swagger';
 import multipart from '@fastify/multipart';
 
-import connectDB from '../../infra/adapters/mongoAdapter/utils/db';
+
 
 import dbConfig from '../../infra/adapters/postgresAdapter/utils/db/DatabaseConfig';
 
@@ -46,8 +46,6 @@ function build() {
   });
 
   fastify.decorateRequest('knex', null);
-
-  fastify.register(connectDB);
   fastify.register(multipart);
   fastify.register(fastifyBlipp);
   fastify.register(fastifyUrlData);

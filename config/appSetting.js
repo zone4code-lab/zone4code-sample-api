@@ -71,7 +71,7 @@ export const postgresDB = {
   POSTGRES_PASSWORD: envVariables.DB.postgres.POSTGRES_PASSWORD,
   POSTGRES_HOST: envVariables.DB.postgres.POSTGRES_HOST,
   POSTGRES_PORT: envVariables.DB.postgres.POSTGRES_PORT,
-  POSTGRES_DATABASE: 'novencia',
+  POSTGRES_DATABASE:envVariables.DB.postgres.POSTGRES_DATABASE,
 };
 
 export const configApp = {

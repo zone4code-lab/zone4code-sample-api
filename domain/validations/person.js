@@ -7,9 +7,7 @@ import { ValidationError } from '../utils/Errors';
  * @function validateAndGetPerson
  */
 
-
-
-export const validateAndGetPersons = async ({ clientId }) => {
+export const validateAndGetPersons = async ({ clientId }, knex) => {
   const errors = {};
 
   const errorMessage = validators.isString(clientId, {
@@ -34,7 +32,7 @@ export const validateAndGetPersons = async ({ clientId }) => {
     );
   }
 
-  const data = await personService.getPersons({ clientId });
+  const data = await personService.getPersons(knex);
   return data;
 };
 
@@ -42,12 +40,11 @@ export const validateAndGetPersons = async ({ clientId }) => {
  * @function validateAndGetByIdPerson
  */
 
-export const validateAndGetByIdPerson = ({ id, clientId }) => {
+export const validateAndGetByIdPerson = ({ id, clientId }, knex) => {
   const errors = {};
 
-  let errorMessage = validators.isObjectID(id, {
+  let errorMessage = validators.isString(id, {
     required: true,
-    min: 1,
   });
 
   if (errorMessage !== null) {
@@ -75,16 +72,16 @@ export const validateAndGetByIdPerson = ({ id, clientId }) => {
       })
     );
   }
-  return personService.getPersonById({ id, clientId });
+  return personService.getPersonById({ id }, knex);
 };
 
 /**
  * @function validateAndAddPerson
  */
 
-export const validateAndAddPerson = (data) => {
+export const validateAndAddPerson = ({clientId},body, knex) => {
   const errors = {};
-  let errorMessage = validators.isString(data.name, {
+  let errorMessage = validators.isString(body.name, {
     required: true,
     min: 1,
   });
@@ -92,17 +89,7 @@ export const validateAndAddPerson = (data) => {
   if (errorMessage !== null) {
     errors.name = errorMessage;
   }
-
-  errorMessage = validators.isString(data.description, {
-    required: true,
-    min: 1,
-  });
-
-  if (errorMessage !== null) {
-    errors.description = errorMessage;
-  }
-
-  errorMessage = validators.isString(data.clientId, {
+  errorMessage = validators.isString(clientId, {
     required: true,
     min: 1,
   });
@@ -116,27 +103,25 @@ export const validateAndAddPerson = (data) => {
       new ValidationError({
         name: 'Person',
         status: 400,
-        code: 'invalid_create_Person',
+        code: 'invalid_create_',
         message: `Invalid create Person input data ${JSON.stringify(errors)}`,
         debugMessage: '[Person] Error in createPerson.',
         error: errors,
       })
     );
   }
-
-  return personService.addPerson({ ...data });
+  return personService.addPerson(body, knex);
 };
 
 /**
  * @function validateAndUpdatePerson
  */
 
-export const validateAndUpdatePerson = ({ id, clientId }, body) => {
+export const validateAndUpdatePerson = ({ id, clientId }, body, knex) => {
   const errors = {};
 
-  let errorMessage = validators.isObjectID(id, {
+   let errorMessage = validators.isString(id, {
     required: true,
-    min: 1,
   });
 
   if (errorMessage !== null) {
@@ -152,16 +137,6 @@ export const validateAndUpdatePerson = ({ id, clientId }, body) => {
       errors.name = errorMessage;
     }
   }
-  if (body.description) {
-    errorMessage = validators.isString(body.description, {
-      required: true,
-      min: 1,
-    });
-    if (errorMessage !== null) {
-      errors.description = errorMessage;
-    }
-  }
-
   errorMessage = validators.isString(clientId, {
     required: true,
     min: 1,
@@ -184,19 +159,17 @@ export const validateAndUpdatePerson = ({ id, clientId }, body) => {
     );
   }
 
-  return personService.updatePerson({ id, body, clientId });
+  return personService.updatePerson({ id }, body, knex);
 };
 
 /**
  * @function validateAndDeletePerson
  */
 
-export const validateAndDeletePerson = ({ id, clientId }) => {
+export const validateAndDeletePerson = ({ id, clientId }, knex) => {
   const errors = {};
-
-  let errorMessage = validators.isObjectID(id, {
+   let errorMessage = validators.isPositiveInteger(id, {
     required: true,
-    min: 1,
   });
 
   errorMessage = validators.isString(clientId, {
@@ -221,9 +194,7 @@ export const validateAndDeletePerson = ({ id, clientId }) => {
       })
     );
   }
-  return personService.deletePerson({ id, clientId });
+  return personService.deletePerson({ id }, knex);
 };
-
-
 export default { validateAndGetPersons, validateAndUpdatePerson, validateAndDeletePerson, validateAndGetByIdPerson };
 
