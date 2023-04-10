@@ -52,6 +52,11 @@ export const addOrder_itemSchema = {
         description: 'price of the order_item to add',
         example: 30,
       },
+      quantity: {
+        type: 'integer',
+        description: 'quantity of the order_item to add',
+        example: 3,
+      },
     }, 
   },
   responses: {
@@ -103,6 +108,11 @@ export const addOrder_itemSchema = {
                 type: 'number',
                 description: 'price of the order_item added',
                 example: 30,
+              },
+              quantity: {
+                type: 'integer',
+                description: 'quantity of the order_item added',
+                example: 3,
               },
             },
           },
@@ -187,6 +197,11 @@ export const getOrder_itemSchema = {
                 type: 'number',
                 description: 'price of the order_item to get',
                 example: 30,
+              },
+              quantity: {
+                type: 'integer',
+                description: 'quantity of the order_item to get',
+                example: 3,
               },
             },
           },
@@ -278,7 +293,11 @@ export const getOrder_itemByIdSchema = {
                 description: 'price of the order_item ',
                 example: 30,
               },
-        
+              quantity: {
+                type: 'integer',
+                description: 'quantity of the order_item ',
+                example: 3,
+              },
             },
           },
         },
@@ -341,6 +360,11 @@ export const updateOrder_itemSchema = {
         type: 'number',
         description: 'price of the order_item to update',
         example: 30,
+      },
+      quantity: {
+        type: 'integer',
+        description: 'quantity of the order_item to update',
+        example: 3,
       },
     }, 
   },
@@ -406,6 +430,11 @@ export const updateOrder_itemSchema = {
                 type: 'number',
                 description: 'price of the order_item ',
                 example: 30,
+              },
+              quantity: {
+                type: 'integer',
+                description: 'quantity of the order_item ',
+                example: 3,
               },
             },
           },
