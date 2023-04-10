@@ -5,7 +5,7 @@ import Product from '../schema/product';
  */
 export const getProducts = async (knex) => {
   try {
-    const data = await Product.query(knex).select('name', 'image').throwIfNotFound();
+    const data = await Product.query(knex).select('name', 'image', 'id').throwIfNotFound();
     return { result: { status: '200', data: data } };
   } catch (err) {
     return { error: err };

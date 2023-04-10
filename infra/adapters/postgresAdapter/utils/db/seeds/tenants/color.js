@@ -1,24 +1,17 @@
 export const seed = function (knex, Promise) {
   // Deletes ALL existing entries
-  return knex('color')
+  return knex('colors')
     .del()
     .then(function () {
       // Inserts seed entries
-      return knex('color').insert([
+      return knex('colors').insert([
         {
-          id: 1,
-          name: 'data',
-          description: 'data'
+          color: "yellow",
+          type_id: 8
         },
         {
-          id: 2,
-          name: 'data',
-          description: 'data'
-        },
-        {
-          id: 3,
-          name: 'data',
-          description: 'data'
+          color: "pink",
+          type_id: 8
         },
       ]);
     });

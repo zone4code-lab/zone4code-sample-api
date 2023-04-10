@@ -1,24 +1,25 @@
 export const seed = function (knex, Promise) {
   // Deletes ALL existing entries
-  return knex('category')
+  return knex('categories')
     .del()
     .then(function () {
       // Inserts seed entries
-      return knex('category').insert([
+      return knex('categories').insert([
         {
-          id: 1,
-          name: 'data',
-          description: 'data'
+          name: "Women",
+          parent_id: null
+        },
+        { 
+          name: "man",
+          parent_id: null
         },
         {
-          id: 2,
-          name: 'data',
-          description: 'data'
+          name: "clothing",
+          parent_id: 4
         },
         {
-          id: 3,
-          name: 'data',
-          description: 'data'
+          name: "shoes",
+          parent_id: 4
         },
       ]);
     });

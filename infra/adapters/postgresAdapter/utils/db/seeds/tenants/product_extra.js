@@ -6,19 +6,20 @@ export const seed = function (knex, Promise) {
       // Inserts seed entries
       return knex('product_extra').insert([
         {
-          id: 1,
-          name: 'data',
-          description: 'data'
+          product_id: 4,
+          extra_id: 4
         },
         {
-          id: 2,
-          name: 'data',
-          description: 'data'
+          product_id: 4,
+          extra_id: 5
         },
         {
-          id: 3,
-          name: 'data',
-          description: 'data'
+          product_id: 5,
+          extra_id: 4
+        },
+        {
+          product_id: 5,
+          extra_id: 5
         },
       ]);
     });

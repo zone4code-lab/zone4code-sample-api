@@ -1,25 +1,18 @@
 export const seed = function (knex, Promise) {
   // Deletes ALL existing entries
-  return knex('extra')
+  return knex('extras')
     .del()
     .then(function () {
       // Inserts seed entries
-      return knex('extra').insert([
+      return knex('extras').insert([
         {
-          id: 1,
-          name: 'data',
-          description: 'data'
+          extra: "french hot fries",
+          price: 2.5
         },
         {
-          id: 2,
-          name: 'data',
-          description: 'data'
-        },
-        {
-          id: 3,
-          name: 'data',
-          description: 'data'
-        },
+          extra: "french  hot fries with extra cheese ",
+          price: 7.5
+        }
       ]);
     });
 };

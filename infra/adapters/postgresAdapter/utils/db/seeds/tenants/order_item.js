@@ -6,20 +6,21 @@ export const seed = function (knex, Promise) {
       // Inserts seed entries
       return knex('order_item').insert([
         {
-          id: 1,
-          name: 'data',
-          description: 'data'
+          order_id: 3,
+          type_id: 8,
+          color_id: 6,
+          size_id: 4,
+          price: 30,
+          quantity: 3
         },
         {
-          id: 2,
-          name: 'data',
-          description: 'data'
-        },
-        {
-          id: 3,
-          name: 'data',
-          description: 'data'
-        },
+          order_id: 4,
+          type_id: 9,
+          color_id: 7,
+          size_id: 4,
+          price: 30,
+          quantity: 3
+        }
       ]);
     });
 };

@@ -1,24 +1,18 @@
 export const seed = function (knex, Promise) {
   // Deletes ALL existing entries
-  return knex('order')
+  return knex('orders')
     .del()
     .then(function () {
       // Inserts seed entries
-      return knex('order').insert([
+      return knex('orders').insert([
         {
-          id: 1,
-          name: 'data',
-          description: 'data'
+          customer_id: '466625',
+          total: '225.00',
         },
         {
-          id: 2,
-          name: 'data',
-          description: 'data'
-        },
-        {
-          id: 3,
-          name: 'data',
-          description: 'data'
+          customer_id: '4625',
+          total: '55.00',
+          shipping: "Overnigt"
         },
       ]);
     });
