@@ -5,7 +5,7 @@ import Product from '../schema/product';
  */
 export const getProducts = async (knex) => {
   try {
-    const data = await Product.query(knex).throwIfNotFound();
+    const data = await Product.query(knex).select('name', 'image').throwIfNotFound();
     return { result: { status: '200', data: data } };
   } catch (err) {
     return { error: err };
@@ -17,6 +17,24 @@ export const getProducts = async (knex) => {
 export const getProductById = async ({ id }, knex) => {
   try {
     const data = await Product.query(knex).findById(id).throwIfNotFound();
+    return { result: { status: '200', data: data } };
+  } catch (err) {
+    return { error: err };
+  }
+};
+/**
+ * @function getTypeByProductId
+ */
+export const getTypeByProductId = async ({ id }, knex) => {
+  try {
+    const data = await Product.query(knex)
+      .findById(id)
+      .select('name')
+      .withGraphFetched('types')
+      .modifyGraph('types', (builder) => {
+        builder.select('name', 'image', 'description');
+        builder.join('price', 'types.id', 'price.type_id').select('price.price');
+      });
     return { result: { status: '200', data: data } };
   } catch (err) {
     return { error: err };

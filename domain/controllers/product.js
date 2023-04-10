@@ -9,6 +9,10 @@ export const getProductById = async (req) => {
   const singleProduct = await validateProduct.validateAndGetByIdProduct(req.params, req.knex);
   return singleProduct;
 };
+export const getTypeByProductId = async (req) => {
+  const types = await validateProduct.validateAndGetTypeByIdProduct(req.params, req.knex);
+  return types;
+};
 
 export const addProduct = async (req) => {
   const addProduct = await validateProduct.validateAndAddProduct(req.params, req.body, req.knex);

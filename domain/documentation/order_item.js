@@ -14,7 +14,7 @@ export const addOrder_itemSchema = {
   },
   body: {
     type: 'object',
-    properties:{
+    properties: {
       order_id: {
         type: 'integer',
         description: 'order_id of the order_item to add',
@@ -36,16 +36,19 @@ export const addOrder_itemSchema = {
         example: 1,
       },
       extras_id: {
-        type: 'object',
-        properties: {
-          id: {
-            type: 'integer',
-            description: 'The ID of the extra',
-            example: c123,
+        type: 'array',
+        items: {
+          type: 'object',
+          properties: {
+            id: {
+              type: 'integer',
+              description: 'The ID of the extra',
+              example: 123,
+            },
           },
         },
         description: 'extras_id of the order_item ',
-        example: { id: c123 },
+        example: [{ id: 123 }, { id: 456 }],
       },
       price: {
         type: 'number',
@@ -57,7 +60,7 @@ export const addOrder_itemSchema = {
         description: 'quantity of the order_item to add',
         example: 3,
       },
-    }, 
+    },
   },
   responses: {
     200: {
@@ -93,16 +96,19 @@ export const addOrder_itemSchema = {
                 example: 1,
               },
               extras_id: {
-                type: 'object',
-                properties: {
-                  id: {
-                    type: 'integer',
-                    description: 'The ID of the extra',
-                    example: c123,
+                type: 'array',
+                items: {
+                  type: 'object',
+                  properties: {
+                    id: {
+                      type: 'integer',
+                      description: 'The ID of the extra',
+                      example: 123,
+                    },
                   },
                 },
                 description: 'extras_id of the order_item ',
-                example: { id: c123 },
+                example: [{ id: 123 }, { id: 456 }],
               },
               price: {
                 type: 'number',
@@ -182,16 +188,19 @@ export const getOrder_itemSchema = {
                 example: 1,
               },
               extras_id: {
-                type: 'object',
-                properties: {
-                  id: {
-                    type: 'integer',
-                    description: 'The ID of the extra',
-                    example: c123,
+                type: 'array',
+                items: {
+                  type: 'object',
+                  properties: {
+                    id: {
+                      type: 'integer',
+                      description: 'The ID of the extra',
+                      example: 123,
+                    },
                   },
                 },
                 description: 'extras_id of the order_item ',
-                example: { id: c123 },
+                example: [{ id: 123 }, { id: 456 }],
               },
               price: {
                 type: 'number',
@@ -221,7 +230,7 @@ export const getOrder_itemSchema = {
       },
     },
   },
-}
+};
 
 export const getOrder_itemByIdSchema = {
   description: 'Get a Order_item by ID',
@@ -277,16 +286,19 @@ export const getOrder_itemByIdSchema = {
                 example: 1,
               },
               extras_id: {
-                type: 'object',
-                properties: {
-                  id: {
-                    type: 'integer',
-                    description: 'The ID of the extra',
-                    example: c123,
+                type: 'array',
+                items: {
+                  type: 'object',
+                  properties: {
+                    id: {
+                      type: 'integer',
+                      description: 'The ID of the extra',
+                      example: 123,
+                    },
                   },
                 },
                 description: 'extras_id of the order_item ',
-                example: { id: c123 },
+                example: [{ id: 123 }, { id: 456 }],
               },
               price: {
                 type: 'number',
@@ -323,7 +335,7 @@ export const updateOrder_itemSchema = {
   summary: 'Update Order_item with given values',
   body: {
     type: 'object',
-    properties:{
+    properties: {
       order_id: {
         type: 'integer',
         description: 'order_id of the order_item to update',
@@ -345,16 +357,19 @@ export const updateOrder_itemSchema = {
         example: 1,
       },
       extras_id: {
-        type: 'object',
-        properties: {
-          id: {
-            type: 'integer',
-            description: 'The ID of the extra',
-            example: c123,
+        type: 'array',
+        items: {
+          type: 'object',
+          properties: {
+            id: {
+              type: 'integer',
+              description: 'The ID of the extra',
+              example: 123,
+            },
           },
         },
         description: 'extras_id of the order_item ',
-        example: { id: c123 },
+        example: [{ id: 123 }, { id: 456 }],
       },
       price: {
         type: 'number',
@@ -366,7 +381,7 @@ export const updateOrder_itemSchema = {
         description: 'quantity of the order_item to update',
         example: 3,
       },
-    }, 
+    },
   },
   params: {
     type: 'object',
@@ -415,16 +430,19 @@ export const updateOrder_itemSchema = {
                 example: 1,
               },
               extras_id: {
-                type: 'object',
-                properties: {
-                  id: {
-                    type: 'integer',
-                    description: 'The ID of the extra',
-                    example: c123,
+                type: 'array',
+                items: {
+                  type: 'object',
+                  properties: {
+                    id: {
+                      type: 'integer',
+                      description: 'The ID of the extra',
+                      example: 123,
+                    },
                   },
                 },
                 description: 'extras_id of the order_item ',
-                example: { id: c123 },
+                example: [{ id: 123 }, { id: 456 }],
               },
               price: {
                 type: 'number',
@@ -509,5 +527,3 @@ export const deleteOrder_itemSchema = {
 };
 
 export default { addOrder_itemSchema, getOrder_itemSchema, getOrder_itemByIdSchema, updateOrder_itemSchema, deleteOrder_itemSchema };
-
-

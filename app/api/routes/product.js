@@ -32,6 +32,12 @@ const routes = [
     handler: Controllers.deleteProduct,
     schema: Documentation.deleteProductSchema,
   },
+  {
+    method: 'GET',
+    url: '/typeByProductId/:id',
+    handler: Controllers.getTypeByProductId,
+    schema: Documentation.getTypeByProductIdSchema,
+  },
 ];
 
 export default routes;

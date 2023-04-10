@@ -1,9 +1,9 @@
 import objection from 'objection';
-import Type from "./type"
+import Type from './type';
 import Order from './order';
 const { Model } = objection;
 
-class Order_item extends Model{
+class Order_item extends Model {
   static get tableName() {
     return 'order_item';
   }
@@ -17,8 +17,17 @@ class Order_item extends Model{
         type_id: { type: 'integer' },
         size_id: { type: 'integer' },
         color_id: { type: 'integer' },
-        extras_id: { type: 'json' },
-        quantity: { type : 'integer' },
+        extras_id: {
+          type: 'array',
+          items: {
+            type: 'object',
+            properties: {
+              id: { type: 'integer' },
+            },
+            required: ['id'],
+          },
+        },
+        quantity: { type: 'integer' },
         price: { type: 'number' },
       },
     };
@@ -32,17 +41,17 @@ class Order_item extends Model{
         modelClass: Type,
         join: {
           from: 'order_item.type_id',
-          to: 'types.id'
-        }
+          to: 'types.id',
+        },
       },
       order: {
         relation: Model.BelongsToOneRelation,
         modelClass: Order,
         join: {
           from: 'order_item.order_id',
-          to: 'orders.id'
-        }
-      }
+          to: 'orders.id',
+        },
+      },
     };
   }
 }

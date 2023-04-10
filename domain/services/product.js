@@ -17,6 +17,13 @@ export const getProductById = async ({ id }, knex) => {
   return response;
 };
 /**
+ * @function getTypeByProductId
+ */
+export const getTypeByProductId = async ({ id }, knex) => {
+  const response = await productRepository.getTypeByProductId({ id }, knex);
+  return response;
+};
+/**
  * @function addProduct
  */
 export const addProduct = async (body, knex) => {
@@ -40,4 +47,4 @@ export const deleteProduct = async ({ id }, knex) => {
   return response;
 };
 
-export default { getProducts, getProductById, addProduct, updateProduct, deleteProduct };
+export default { getProducts, getProductById, addProduct, updateProduct, deleteProduct, getTypeByProductId };

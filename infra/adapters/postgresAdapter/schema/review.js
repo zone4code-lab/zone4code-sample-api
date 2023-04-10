@@ -2,20 +2,29 @@ import objection from 'objection';
 import Type from './type';
 const { Model } = objection;
 
-class Review extends Model{
+class Review extends Model {
   static get tableName() {
     return 'reviews';
   }
-  
+
   static get jsonSchema() {
     return {
       type: 'object',
       properties: {
         type_id: { type: 'integer' },
         customer_id: { type: 'string' },
-        rating:{type: 'string'},
-        comment:{type: 'string'},
-        images:{type: 'json'},
+        rating: { type: 'string' },
+        comment: { type: 'string' },
+        images: {
+          type: 'array',
+          items: {
+            type: 'object',
+            properties: {
+              id: { type: 'integer' },
+            },
+            required: ['id'],
+          },
+        },
       },
     };
   }
@@ -28,9 +37,9 @@ class Review extends Model{
         modelClass: Type,
         join: {
           from: 'reviews.type_id',
-          to: 'types.id'
-        }
-    }
+          to: 'types.id',
+        },
+      },
     };
   }
 }

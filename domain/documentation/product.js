@@ -14,16 +14,16 @@ export const addProductSchema = {
   },
   body: {
     type: 'object',
-     properties:{
+    properties: {
       name: {
         type: 'string',
         description: 'Name of the product to add',
-        example: 'John Doe',
+        example: 'pizza',
       },
       description: {
         type: 'string',
         description: 'Description of the product to add',
-        example: 'John Doe is smart',
+        example: 'pizza classic',
       },
       image: {
         type: 'string',
@@ -35,7 +35,7 @@ export const addProductSchema = {
         description: 'if the product to add does not have extra type true',
         example: true,
       },
-    }, 
+    },
   },
   responses: {
     200: {
@@ -155,10 +155,10 @@ export const getProductSchema = {
       },
     },
   },
-}
+};
 
 export const getProductByIdSchema = {
- description: 'Get a Product by ID',
+  description: 'Get a Product by ID',
   tags: ['Product'],
   summary: 'Retrieve a Product by ID',
   params: {
@@ -235,7 +235,7 @@ export const updateProductSchema = {
   summary: 'Update Product with given values',
   body: {
     type: 'object',
-    properties:{
+    properties: {
       name: {
         type: 'string',
         description: 'Name of the product to update',
@@ -256,7 +256,7 @@ export const updateProductSchema = {
         description: 'exclude_extra of the product to update',
         example: true,
       },
-    }, 
+    },
   },
   params: {
     type: 'object',
@@ -302,7 +302,7 @@ export const updateProductSchema = {
               exclude_extra: {
                 type: 'boolean',
                 description: 'exclude_extra of the product to update',
-                example:false,
+                example: false,
               },
             },
           },
@@ -375,7 +375,90 @@ export const deleteProductSchema = {
     },
   },
 };
+export const getTypeByProductIdSchema = {
+  description: 'Get types by ID product',
+  tags: ['Product'],
+  summary: 'Retrieve types  by ID product',
+  params: {
+    type: 'object',
+    properties: {
+      clientId: {
+        type: 'string',
+        description: 'Name of the client',
+        example: 'novencia',
+      },
+      id: {
+        type: 'string',
+        description: 'ID of the product to retrieve',
+        example: 1,
+      },
+    },
+    required: ['clientId', 'id'],
+  },
+  responses: {
+    200: {
+      description: 'Successful response',
+      schema: {
+        type: 'object',
+        properties: {
+          status: {
+            type: 'string',
+            description: 'HTTP status code',
+          },
+          data: {
+            type: 'object',
+            properties: {
+              name: {
+                type: 'string',
+                description: 'Name of the product',
+                example: 'John Doe',
+              },
+              types: {
+                type: 'array',
+                items: {
+                  type: 'object',
+                  properties: {
+                    name: {
+                      type: 'string',
+                      description: 'Name of the product type',
+                      example: 'Type A',
+                    },
+                    image: {
+                      type: 'string',
+                      description: 'URL of the product type image',
+                      example: 'https://example.com/type_a.png',
+                    },
+                    description: {
+                      type: 'string',
+                      description: 'Description of the product type',
+                      example: 'This is type A',
+                    },
+                    price: {
+                      type: 'number',
+                      description: 'price of the product type',
+                      example: 71,
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+    404: {
+      description: 'Product not found',
+      schema: {
+        type: 'object',
+        properties: {
+          error: {
+            type: 'string',
+            description: 'Error message',
+          },
+        },
+      },
+    },
+  },
+};
 
-export default { addProductSchema, getProductSchema, getProductByIdSchema, updateProductSchema, deleteProductSchema };
-
-
+export default { addProductSchema, getProductSchema, getProductByIdSchema, updateProductSchema, deleteProductSchema, getTypeByProductIdSchema };

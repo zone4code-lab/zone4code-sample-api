@@ -74,7 +74,43 @@ export const validateAndGetByIdProduct = ({ id, clientId }, knex) => {
   }
   return productService.getProductById({ id }, knex);
 };
+/**
+ * @function validateAndGetTypeByIdProduct
+ */
+export const validateAndGetTypeByIdProduct = ({ id, clientId }, knex) => {
+  const errors = {};
 
+  let errorMessage = validators.isString(id, {
+    required: true,
+  });
+
+  if (errorMessage !== null) {
+    errors.id = errorMessage;
+  }
+
+  errorMessage = validators.isString(clientId, {
+    required: true,
+    min: 1,
+  });
+
+  if (errorMessage !== null) {
+    errors.clientId = errorMessage;
+  }
+
+  if (!validators.isEmptyObject(errors)) {
+    return Promise.reject(
+      new ValidationError({
+        name: 'Product',
+        status: 400,
+        code: 'invalid_get_Product',
+        message: `Invalid get Product input data ${JSON.stringify(errors)}`,
+        debugMessage: '[Product] Error in getProductById.',
+        error: errors,
+      })
+    );
+  }
+  return productService.getTypeByProductId({ id }, knex);
+};
 /**
  * @function validateAndAddProduct
  */
@@ -209,5 +245,5 @@ export const validateAndDeleteProduct = ({ id, clientId }, knex) => {
   }
   return productService.deleteProduct({ id }, knex);
 };
-export default { validateAndGetProducts, validateAndUpdateProduct, validateAndDeleteProduct, validateAndGetByIdProduct };
+export default { validateAndGetProducts, validateAndUpdateProduct, validateAndDeleteProduct, validateAndGetByIdProduct, validateAndGetTypeByIdProduct };
 

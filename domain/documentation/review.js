@@ -14,7 +14,7 @@ export const addReviewSchema = {
   },
   body: {
     type: 'object',
-    properties:{
+    properties: {
       type_id: {
         type: 'integer',
         description: 'type_id of the review to add',
@@ -28,7 +28,7 @@ export const addReviewSchema = {
       rating: {
         type: 'string',
         description: 'rating of the review to add',
-        example: "5",
+        example: '5',
       },
       comment: {
         type: 'string',
@@ -36,18 +36,21 @@ export const addReviewSchema = {
         example: "it's cool",
       },
       images: {
-        type: 'object',
-        properties: {
-          id: {
-            type: 'string',
-            description: 'The ID of the image',
-            example: 'abc123',
+        type: 'array',
+        items: {
+          type: 'object',
+          properties: {
+            id: {
+              type: 'integer',
+              description: 'The ID of the image',
+              example: 123,
+            },
           },
         },
-        description: 'Images of the review',
-        example: { id: 'abc123' },
+        description: 'images of the review ',
+        example: [{ id: 123 }, { id: 456 }],
       },
-    }, 
+    },
   },
   responses: {
     200: {
@@ -79,16 +82,19 @@ export const addReviewSchema = {
                 example: '8',
               },
               images: {
-                type: 'object',
-                properties: {
-                  id: {
-                    type: 'string',
-                    description: 'The ID of the image',
-                    example: 'abc123',
+                type: 'array',
+                items: {
+                  type: 'object',
+                  properties: {
+                    id: {
+                      type: 'integer',
+                      description: 'The ID of the image',
+                      example: 123,
+                    },
                   },
                 },
-                description: 'Images of the review',
-                example: { id: 'abc123' },
+                description: 'image of the review ',
+                example: [{ id: 123 }, { id: 456 }],
               },
             },
           },
@@ -154,16 +160,19 @@ export const getReviewSchema = {
                 example: '10',
               },
               images: {
-                type: 'object',
-                properties: {
-                  id: {
-                    type: 'string',
-                    description: 'The ID of the image',
-                    example: 1,
+                type: 'array',
+                items: {
+                  type: 'object',
+                  properties: {
+                    id: {
+                      type: 'integer',
+                      description: 'The ID of the image',
+                      example: 123,
+                    },
                   },
                 },
-                description: 'Images of the review',
-                example: { id: 1 },
+                description: 'image of the review ',
+                example: [{ id: 123 }, { id: 456 }],
               },
             },
           },
@@ -183,10 +192,10 @@ export const getReviewSchema = {
       },
     },
   },
-}
+};
 
 export const getReviewByIdSchema = {
- description: 'Get a Review by ID',
+  description: 'Get a Review by ID',
   tags: ['Review'],
   summary: 'Retrieve a Review by ID',
   params: {
@@ -234,16 +243,19 @@ export const getReviewByIdSchema = {
                 example: '10',
               },
               images: {
-                type: 'object',
-                properties: {
-                  id: {
-                    type: 'string',
-                    description: 'The ID of the image',
-                    example: 1,
+                type: 'array',
+                items: {
+                  type: 'object',
+                  properties: {
+                    id: {
+                      type: 'integer',
+                      description: 'The ID of the image',
+                      example: 123,
+                    },
                   },
                 },
-                description: 'Images of the review',
-                example: { id: 1 },
+                description: 'image of the review ',
+                example: [{ id: 123 }, { id: 456 }],
               },
             },
           },
@@ -270,7 +282,7 @@ export const updateReviewSchema = {
   summary: 'Update Review with given values',
   body: {
     type: 'object',
-    properties:{
+    properties: {
       type_id: {
         type: 'integer',
         description: 'type_id of the review to update',
@@ -287,18 +299,21 @@ export const updateReviewSchema = {
         example: '10',
       },
       images: {
-        type: 'object',
-        properties: {
-          id: {
-            type: 'string',
-            description: 'The ID of the image',
-            example: 1,
+        type: 'array',
+        items: {
+          type: 'object',
+          properties: {
+            id: {
+              type: 'integer',
+              description: 'The ID of the image',
+              example: 123,
+            },
           },
         },
-        description: 'Images of the review',
-        example: { id: 1 },
+        description: 'image of the review ',
+        example: [{ id: 123 }, { id: 456 }],
       },
-    }, 
+    },
   },
   params: {
     type: 'object',
@@ -342,16 +357,19 @@ export const updateReviewSchema = {
                 example: '10',
               },
               images: {
-                type: 'object',
-                properties: {
-                  id: {
-                    type: 'string',
-                    description: 'The ID of the image',
-                    example: 1,
+                type: 'array',
+                items: {
+                  type: 'object',
+                  properties: {
+                    id: {
+                      type: 'integer',
+                      description: 'The ID of the extra',
+                      example: 123,
+                    },
                   },
                 },
-                description: 'Images of the review',
-                example: { id: 1 },
+                description: 'images of the review ',
+                example: [{ id: 123 }, { id: 456 }],
               },
             },
           },
@@ -426,5 +444,3 @@ export const deleteReviewSchema = {
 };
 
 export default { addReviewSchema, getReviewSchema, getReviewByIdSchema, updateReviewSchema, deleteReviewSchema };
-
-
