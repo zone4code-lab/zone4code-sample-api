@@ -14,14 +14,14 @@ export const addColorSchema = {
   },
   body: {
     type: 'object',
-     properties:{
+    properties:{
       color: {
         type: 'string',
         description: 'color of the color to add',
         example: 'red',
       },
       type_id: {
-        type: 'integer',
+        type: ['integer', 'null'],
         description: 'type_id of the color to add',
         example: 525,
       },
@@ -46,7 +46,7 @@ export const addColorSchema = {
                 example: 'red',
               },
               type_id: {
-                type: 'integer',
+                type: ['integer', 'null'],
                 description: 'type_id of the color to add',
                 example: 525,
               },
@@ -103,7 +103,7 @@ export const getColorSchema = {
                 example: 'red',
               },
               type_id: {
-                type: 'integer',
+                type: ['integer', 'null'],
                 description: 'type_id of the color to get',
                 example: 525,
               },
@@ -128,7 +128,7 @@ export const getColorSchema = {
 }
 
 export const getColorByIdSchema = {
- description: 'Get a Color by ID',
+  description: 'Get a Color by ID',
   tags: ['Color'],
   summary: 'Retrieve a Color by ID',
   params: {
@@ -166,7 +166,7 @@ export const getColorByIdSchema = {
                 example: 'red',
               },
               type_id: {
-                type: 'integer',
+                type: ['integer', 'null'],
                 description: 'type_id of the color',
                 example: 525,
               },
@@ -202,7 +202,7 @@ export const updateColorSchema = {
         example: 'red',
       },
       type_id: {
-        type: 'integer',
+        type: ['integer', 'null'],
         description: 'type_id of the color to update',
         example: 525,
       },
@@ -234,15 +234,15 @@ export const updateColorSchema = {
           data: {
             type: 'object',
             properties: {
-              name: {
+              color: {
                 type: 'string',
                 description: 'Name of the color',
                 example: 'John Doe',
               },
-              description: {
-                type: 'string',
-                description: 'Name of the color to update',
-                example: 'John Doe is smart',
+              type_id: {
+                type: ['integer', 'null'],
+                description: 'type_id of the color to update',
+                example: 4,
               },
             },
           },

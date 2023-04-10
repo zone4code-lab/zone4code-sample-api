@@ -6,8 +6,13 @@ import Price from './price';
 import Color from './color';
 import Review from './review';
 import Material from './material';
-export default [...Product, ...Type, ...Size, ...Product_size, ...Price, ...Color, ...Review, ...Material];
+import Extra from './extra';
+import Product_extra from './product_extra';
+import Category from './category';
+import Product_category from './product_category';
+import Order from './order';
+export default [...Product, ...Type, ...Size, ...Product_size, ...Price, ...Color, ...Review, ...Material, ...Extra, ...Product_extra, ...Category, ...Product_category, ...Order];
 
 
 
-
+import Order_item from './order_item';

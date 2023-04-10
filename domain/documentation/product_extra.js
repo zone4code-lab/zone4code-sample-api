@@ -1,7 +1,7 @@
-export const addProduct_sizeSchema = {
-  description: 'Create a new Product_size',
-  tags: ['Product_size'],
-  summary: 'Creates new Product_size with given values',
+export const addProduct_extraSchema = {
+  description: 'Create a new Product_extra',
+  tags: ['Product_extra'],
+  summary: 'Creates new Product_extra with given values',
   params: {
     type: 'object',
     properties: {
@@ -14,16 +14,16 @@ export const addProduct_sizeSchema = {
   },
   body: {
     type: 'object',
-     properties:{
+    properties:{
       product_id: {
         type: 'integer',
-        description: 'product_id of the product_size to add',
-        example: 5223,
+        description: 'product_id of the product_extra to add',
+        example: 1,
       },
-      size_id: {
-        type: ['integer', 'null'],
-        description: 'product_id of the product_size to add',
-        example:523,
+      extra_id: {
+        type: 'integer',
+        description: 'extra_id of the product_extra to add',
+        example: 1,
       },
     }, 
   },
@@ -42,13 +42,13 @@ export const addProduct_sizeSchema = {
             properties: {
               product_id: {
                 type: 'integer',
-                description: 'product_id of the added product_size',
-                example: 252,
+                description: 'product_id of the added product_extra',
+                example: 1,
               },
-              size_id: {
-                type: ['integer', 'null'],
-                description: 'size_id of the added product_size',
-                example: 22,
+              extra_id: {
+                type: 'integer',
+                description: 'extra_id of the added product_extra',
+                example: 1,
               },
             },
           },
@@ -69,10 +69,10 @@ export const addProduct_sizeSchema = {
     },
   },
 };
-export const getProduct_sizeSchema = {
-  description: 'Get a Product_size',
-  tags: ['Product_size'],
-  summary: 'Get all Product_sizes',
+export const getProduct_extraSchema = {
+  description: 'Get a Product_extra',
+  tags: ['Product_extra'],
+  summary: 'Get all Product_extras',
   params: {
     type: 'object',
     properties: {
@@ -99,12 +99,12 @@ export const getProduct_sizeSchema = {
             properties: {
               product_id: {
                 type: 'integer',
-                description: 'product_id of the product_size',
+                description: 'product_id of the product_extra',
                 example: 1,
               },
-              size_id: {
-                type: ['integer', 'null'],
-                description: 'size_id of the product_size to get',
+              extra_id: {
+                type: 'integer',
+                description: 'extra_id of the product_extra to get',
                 example: 1,
               },
             },
@@ -113,7 +113,7 @@ export const getProduct_sizeSchema = {
       },
     },
     404: {
-      description: 'Product_size not found',
+      description: 'Product_extra not found',
       schema: {
         type: 'object',
         properties: {
@@ -127,10 +127,10 @@ export const getProduct_sizeSchema = {
   },
 }
 
-export const getProduct_sizeByIdSchema = {
- description: 'Get a Product_size by ID',
-  tags: ['Product_size'],
-  summary: 'Retrieve a Product_size by ID',
+export const getProduct_extraByIdSchema = {
+  description: 'Get a Product_extra by ID',
+  tags: ['Product_extra'],
+  summary: 'Retrieve a Product_extra by ID',
   params: {
     type: 'object',
     properties: {
@@ -141,7 +141,7 @@ export const getProduct_sizeByIdSchema = {
       },
       id: {
         type: 'string',
-        description: 'ID of the product_size to retrieve',
+        description: 'ID of the product_extra to retrieve',
         example: 1,
       },
     },
@@ -162,13 +162,13 @@ export const getProduct_sizeByIdSchema = {
             properties: {
               product_id: {
                 type: 'integer',
-                description: 'product_id of the product_size',
+                description: 'product_id of the product_extra',
                 example: 1,
               },
-              size_id: {
-                type: ['integer', 'null'],
-                description: 'size_id of the product_size to get',
-                example: 2,
+              extra_id: {
+                type: 'integer',
+                description: 'extra_id of the product_extra to get',
+                example: 1,
               },
             },
           },
@@ -176,7 +176,7 @@ export const getProduct_sizeByIdSchema = {
       },
     },
     404: {
-      description: 'Product_size not found',
+      description: 'Product_extra not found',
       schema: {
         type: 'object',
         properties: {
@@ -189,21 +189,21 @@ export const getProduct_sizeByIdSchema = {
     },
   },
 };
-export const updateProduct_sizeSchema = {
-  description: 'update a Product_size',
-  tags: ['Product_size'],
-  summary: 'Update Product_size with given values',
+export const updateProduct_extraSchema = {
+  description: 'update a Product_extra',
+  tags: ['Product_extra'],
+  summary: 'Update Product_extra with given values',
   body: {
     type: 'object',
     properties:{
       product_id: {
         type: 'integer',
-        description: 'product_id of the product_size to update',
-        example: 5,
+        description: 'product_id of the product_extra to update',
+        example: 1,
       },
-      size_id: {
-        type: ['integer', 'null'],
-        description: 'size_id of the product_size to update',
+      extra_id: {
+        type: 'integer',
+        description: 'extra_id of the product_extra to update',
         example: 1,
       },
     }, 
@@ -217,7 +217,7 @@ export const updateProduct_sizeSchema = {
       },
       id: {
         type: 'string',
-        description: 'Product_size id',
+        description: 'Product_extra id',
       },
     },
   },
@@ -236,13 +236,13 @@ export const updateProduct_sizeSchema = {
             properties: {
               product_id: {
                 type: 'integer',
-                description: 'product_id of the product_size',
-                example: 5,
+                description: 'product_id of the product_extra',
+                example: 1,
               },
-              size_id: {
-                type: ['integer', 'null'],
-                description: 'size_id of the product_size to update',
-                example: 5,
+              extra_id: {
+                type: 'integer',
+                description: 'extar_id of the product_extra to update',
+                example: 1,
               },
             },
           },
@@ -250,7 +250,7 @@ export const updateProduct_sizeSchema = {
       },
     },
     404: {
-      description: 'Product_size not found',
+      description: 'Product_extra not found',
       schema: {
         type: 'object',
         properties: {
@@ -264,10 +264,10 @@ export const updateProduct_sizeSchema = {
   },
 };
 
-export const deleteProduct_sizeSchema = {
-  description: 'Delete a Product_size',
-  tags: ['Product_size'],
-  summary: 'Delete a Product_size by ID',
+export const deleteProduct_extraSchema = {
+  description: 'Delete a Product_extra',
+  tags: ['Product_extra'],
+  summary: 'Delete a Product_extra by ID',
   params: {
     type: 'object',
     properties: {
@@ -278,7 +278,7 @@ export const deleteProduct_sizeSchema = {
       },
       id: {
         type: 'string',
-        description: 'ID of the product_size to delete',
+        description: 'ID of the product_extra to delete',
         example: 1,
       },
     },
@@ -302,7 +302,7 @@ export const deleteProduct_sizeSchema = {
       },
     },
     404: {
-      description: 'Product_size not found',
+      description: 'Product_extra not found',
       schema: {
         type: 'object',
         properties: {
@@ -316,6 +316,6 @@ export const deleteProduct_sizeSchema = {
   },
 };
 
-export default { addProduct_sizeSchema, getProduct_sizeSchema, getProduct_sizeByIdSchema, updateProduct_sizeSchema, deleteProduct_sizeSchema };
+export default { addProduct_extraSchema, getProduct_extraSchema, getProduct_extraByIdSchema, updateProduct_extraSchema, deleteProduct_extraSchema };
 
 

@@ -4,6 +4,7 @@ import Size from './size';
 import Color from './color';
 import Review from './review';
 import Material from './material';
+import Order from './order';
 const { Model } = objection;
 
 class Type extends Model{
@@ -24,7 +25,6 @@ class Type extends Model{
   }
 
   static get relationMappings() {
-    // const Order = require('./order');
     return {
       product: {
         relation: Model.BelongsToOneRelation,
@@ -70,18 +70,18 @@ class Type extends Model{
           to: 'sizes.id'
         }
       },
-      // orders: {
-      //   relation: Model.ManyToManyRelation,
-      //   modelClass: Order,
-      //   join: {
-      //     from: 'types.id',
-      //     through: {
-      //       from: 'order_item.type_id',
-      //       to: 'order_item.order_id'
-      //     },
-      //     to: 'orders.id'
-      //   }
-      // }
+      orders: {
+        relation: Model.ManyToManyRelation,
+        modelClass: Order,
+        join: {
+          from: 'types.id',
+          through: {
+            from: 'order_item.type_id',
+            to: 'order_item.order_id'
+          },
+          to: 'orders.id'
+        }
+      }
     };
   }
 }

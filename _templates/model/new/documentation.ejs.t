@@ -17,7 +17,7 @@ export const add<%= h.capitalize(name)%>Schema = {
   },
   body: {
     type: 'object',
-     properties:{
+    properties:{
       name: {
         type: 'string',
         description: 'Name of the <%= name%> to add',

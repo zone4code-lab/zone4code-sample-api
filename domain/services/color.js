@@ -16,6 +16,11 @@ export const getColorById = async ({ id }, knex) => {
 
   return response;
 };
+// export const addUser = async ({clientId},body) => {
+//   console.log('data', date)
+//   const response = await userRepository.addUser(data);
+//   return response;
+// };
 /**
  * @function addColor
  */

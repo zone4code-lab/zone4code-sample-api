@@ -12,7 +12,7 @@ class Color extends Model{
       type: 'object',
       properties: {
         color: { type: 'string' },
-        type_id: { type: 'integer' },
+        type_id: { type: ['integer', 'null']},
       },
     };
   }

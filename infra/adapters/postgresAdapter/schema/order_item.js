@@ -1,11 +1,11 @@
 import objection from 'objection';
-import Type from './type';
-import Size from './size';
+import Type from "./type"
+import Order from './order';
 const { Model } = objection;
 
-class Price extends Model{
+class Order_item extends Model{
   static get tableName() {
-    return 'price';
+    return 'order_item';
   }
 
   static get jsonSchema() {
@@ -13,29 +13,34 @@ class Price extends Model{
       type: 'object',
       // required: [],
       properties: {
+        order_id: { type: 'integer' },
         type_id: { type: 'integer' },
-        size_id: { type: ['integer', 'null']},
+        size_id: { type: 'integer' },
+        color_id: { type: 'integer' },
+        extras_id: { type: 'json' },
+        quantity: { type : 'integer' },
         price: { type: 'number' },
       },
     };
   }
 
   static get relationMappings() {
+    // Importing models here is one way to avoid require loops.
     return {
       type: {
         relation: Model.BelongsToOneRelation,
         modelClass: Type,
         join: {
-          from: 'price.type_id',
+          from: 'order_item.type_id',
           to: 'types.id'
         }
       },
-      size: {
+      order: {
         relation: Model.BelongsToOneRelation,
-        modelClass: Size,
+        modelClass: Order,
         join: {
-          from: 'price.size_id',
-          to: 'sizes.id'
+          from: 'order_item.order_id',
+          to: 'orders.id'
         }
       }
     };
@@ -43,4 +48,4 @@ class Price extends Model{
 }
 
 // eslint-disable-next-line import/prefer-default-export
-export default Price;
+export default Order_item;

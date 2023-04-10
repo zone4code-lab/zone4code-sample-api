@@ -1,13 +1,13 @@
 import validators from '../utils/validators';
-import * as colorService from '../services';
+import * as categoryService from '../services';
 
 import { ValidationError } from '../utils/Errors';
 
 /**
- * @function validateAndGetColor
+ * @function validateAndGetCategory
  */
 
-export const validateAndGetColors = async ({ clientId }, knex) => {
+export const validateAndGetCategorys = async ({ clientId }, knex) => {
   const errors = {};
 
   const errorMessage = validators.isString(clientId, {
@@ -22,25 +22,25 @@ export const validateAndGetColors = async ({ clientId }, knex) => {
   if (!validators.isEmptyObject(errors)) {
     return Promise.reject(
       new ValidationError({
-        name: 'Color',
+        name: 'Category',
         status: 400,
-        code: 'invalid_get_Color',
-        message: `Invalid get Color input data ${JSON.stringify(errors)}`,
-        debugMessage: '[Color] Error in getColorById.',
+        code: 'invalid_get_Category',
+        message: `Invalid get Category input data ${JSON.stringify(errors)}`,
+        debugMessage: '[Category] Error in getCategoryById.',
         error: errors,
       })
     );
   }
 
-  const data = await colorService.getColors(knex);
+  const data = await categoryService.getCategorys(knex);
   return data;
 };
 
 /**
- * @function validateAndGetByIdColor
+ * @function validateAndGetByIdCategory
  */
 
-export const validateAndGetByIdColor = ({ id, clientId }, knex) => {
+export const validateAndGetByIdCategory = ({ id, clientId }, knex) => {
   const errors = {};
 
   let errorMessage = validators.isString(id, {
@@ -63,31 +63,31 @@ export const validateAndGetByIdColor = ({ id, clientId }, knex) => {
   if (!validators.isEmptyObject(errors)) {
     return Promise.reject(
       new ValidationError({
-        name: 'Color',
+        name: 'Category',
         status: 400,
-        code: 'invalid_get_Color',
-        message: `Invalid get Color input data ${JSON.stringify(errors)}`,
-        debugMessage: '[Color] Error in getColorById.',
+        code: 'invalid_get_Category',
+        message: `Invalid get Category input data ${JSON.stringify(errors)}`,
+        debugMessage: '[Category] Error in getCategoryById.',
         error: errors,
       })
     );
   }
-  return colorService.getColorById({ id }, knex);
+  return categoryService.getCategoryById({ id }, knex);
 };
 
 /**
- * @function validateAndAddColor
+ * @function validateAndAddCategory
  */
 
-export const validateAndAddColor = ({clientId},body, knex) => {
+export const validateAndAddCategory = ({clientId},body, knex) => {
   const errors = {};
-  let errorMessage = validators.isString(body.color, {
+  let errorMessage = validators.isString(body.name, {
     required: true,
     min: 1,
   });
 
   if (errorMessage !== null) {
-    errors.color = errorMessage;
+    errors.name = errorMessage;
   }
   errorMessage = validators.isString(clientId, {
     required: true,
@@ -101,23 +101,23 @@ export const validateAndAddColor = ({clientId},body, knex) => {
   if (!validators.isEmptyObject(errors)) {
     return Promise.reject(
       new ValidationError({
-        name: 'Color',
+        name: 'Category',
         status: 400,
         code: 'invalid_create_',
-        message: `Invalid create Color input data ${JSON.stringify(errors)}`,
-        debugMessage: '[Color] Error in createColor.',
+        message: `Invalid create Category input data ${JSON.stringify(errors)}`,
+        debugMessage: '[Category] Error in createCategory.',
         error: errors,
       })
     );
   }
-  return colorService.addColor(body, knex);
+  return categoryService.addCategory(body, knex);
 };
 
 /**
- * @function validateAndUpdateColor
+ * @function validateAndUpdateCategory
  */
 
-export const validateAndUpdateColor = ({ id, clientId }, body, knex) => {
+export const validateAndUpdateCategory = ({ id, clientId }, body, knex) => {
   const errors = {};
 
    let errorMessage = validators.isString(id, {
@@ -130,7 +130,7 @@ export const validateAndUpdateColor = ({ id, clientId }, body, knex) => {
 
   if (body.name) {
     errorMessage = validators.isString(body.name, {
-      required: true,
+      required: false,
       min: 1,
     });
     if (errorMessage !== null) {
@@ -149,24 +149,24 @@ export const validateAndUpdateColor = ({ id, clientId }, body, knex) => {
   if (!validators.isEmptyObject(errors)) {
     return Promise.reject(
       new ValidationError({
-        name: 'Color',
+        name: 'Category',
         status: 400,
-        code: 'invalid_update_Color',
-        message: `Invalid update Color input data ${JSON.stringify(errors)}`,
-        debugMessage: '[Color] Error in updateColor.',
+        code: 'invalid_update_Category',
+        message: `Invalid update Category input data ${JSON.stringify(errors)}`,
+        debugMessage: '[Category] Error in updateCategory.',
         error: errors,
       })
     );
   }
 
-  return colorService.updateColor({ id }, body, knex);
+  return categoryService.updateCategory({ id }, body, knex);
 };
 
 /**
- * @function validateAndDeleteColor
+ * @function validateAndDeleteCategory
  */
 
-export const validateAndDeleteColor = ({ id, clientId }, knex) => {
+export const validateAndDeleteCategory = ({ id, clientId }, knex) => {
   const errors = {};
    let errorMessage = validators.isString(id, {
     required: true,
@@ -185,16 +185,16 @@ export const validateAndDeleteColor = ({ id, clientId }, knex) => {
     errors.id = errorMessage;
     return Promise.reject(
       new ValidationError({
-        name: 'Color',
+        name: 'Category',
         status: 400,
-        code: 'invalid_delete_Color',
-        message: `Invalid get Color input data ${JSON.stringify(errors)}`,
-        debugMessage: '[Color] Error in deleteColor.',
+        code: 'invalid_delete_Category',
+        message: `Invalid get Category input data ${JSON.stringify(errors)}`,
+        debugMessage: '[Category] Error in deleteCategory.',
         error: errors,
       })
     );
   }
-  return colorService.deleteColor({ id }, knex);
+  return categoryService.deleteCategory({ id }, knex);
 };
-export default { validateAndGetColors, validateAndUpdateColor, validateAndDeleteColor, validateAndGetByIdColor };
+export default { validateAndGetCategorys, validateAndUpdateCategory, validateAndDeleteCategory, validateAndGetByIdCategory };
 

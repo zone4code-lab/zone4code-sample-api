@@ -1,39 +1,40 @@
 import objection from 'objection';
 import Product from './product';
-import Size from './size';
+import Extra from './extra';
 const { Model } = objection;
 
-class Product_size extends Model{
+class Product_extra extends Model{
   static get tableName() {
-    return 'product_size';
+    return 'product_extra';
   }
 
   static get jsonSchema() {
     return {
       type: 'object',
       properties: {
-        size_id: { type: ['integer', 'null'] },
         product_id: { type: 'integer' },
+        extra_id: { type: ['integer', 'null']},
       },
     };
   }
 
-  static get relationMappings(){
+  static get relationMappings() {
+    // Importing models here is one way to avoid require loops.
     return {
       product: {
         relation: Model.BelongsToOneRelation,
         modelClass: Product,
         join: {
-          from: 'product_size.product_id',
+          from: 'product_extra.product_id',
           to: 'products.id'
         }
       },
-      size: {
+      extra: {
         relation: Model.BelongsToOneRelation,
-        modelClass: Size,
+        modelClass: Extra,
         join: {
-          from: 'product_size.size_id',
-          to: 'sizes.id'
+          from: 'product_extra.extra_id',
+          to: 'extras.id'
         }
       }
     };
@@ -41,4 +42,4 @@ class Product_size extends Model{
 }
 
 // eslint-disable-next-line import/prefer-default-export
-export default Product_size;
+export default Product_extra;

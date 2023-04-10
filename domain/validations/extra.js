@@ -1,13 +1,13 @@
 import validators from '../utils/validators';
-import * as colorService from '../services';
+import * as extraService from '../services';
 
 import { ValidationError } from '../utils/Errors';
 
 /**
- * @function validateAndGetColor
+ * @function validateAndGetExtra
  */
 
-export const validateAndGetColors = async ({ clientId }, knex) => {
+export const validateAndGetExtras = async ({ clientId }, knex) => {
   const errors = {};
 
   const errorMessage = validators.isString(clientId, {
@@ -22,25 +22,25 @@ export const validateAndGetColors = async ({ clientId }, knex) => {
   if (!validators.isEmptyObject(errors)) {
     return Promise.reject(
       new ValidationError({
-        name: 'Color',
+        name: 'Extra',
         status: 400,
-        code: 'invalid_get_Color',
-        message: `Invalid get Color input data ${JSON.stringify(errors)}`,
-        debugMessage: '[Color] Error in getColorById.',
+        code: 'invalid_get_Extra',
+        message: `Invalid get Extra input data ${JSON.stringify(errors)}`,
+        debugMessage: '[Extra] Error in getExtraById.',
         error: errors,
       })
     );
   }
 
-  const data = await colorService.getColors(knex);
+  const data = await extraService.getExtras(knex);
   return data;
 };
 
 /**
- * @function validateAndGetByIdColor
+ * @function validateAndGetByIdExtra
  */
 
-export const validateAndGetByIdColor = ({ id, clientId }, knex) => {
+export const validateAndGetByIdExtra = ({ id, clientId }, knex) => {
   const errors = {};
 
   let errorMessage = validators.isString(id, {
@@ -63,31 +63,31 @@ export const validateAndGetByIdColor = ({ id, clientId }, knex) => {
   if (!validators.isEmptyObject(errors)) {
     return Promise.reject(
       new ValidationError({
-        name: 'Color',
+        name: 'Extra',
         status: 400,
-        code: 'invalid_get_Color',
-        message: `Invalid get Color input data ${JSON.stringify(errors)}`,
-        debugMessage: '[Color] Error in getColorById.',
+        code: 'invalid_get_Extra',
+        message: `Invalid get Extra input data ${JSON.stringify(errors)}`,
+        debugMessage: '[Extra] Error in getExtraById.',
         error: errors,
       })
     );
   }
-  return colorService.getColorById({ id }, knex);
+  return extraService.getExtraById({ id }, knex);
 };
 
 /**
- * @function validateAndAddColor
+ * @function validateAndAddExtra
  */
 
-export const validateAndAddColor = ({clientId},body, knex) => {
+export const validateAndAddExtra = ({clientId},body, knex) => {
   const errors = {};
-  let errorMessage = validators.isString(body.color, {
+  let errorMessage = validators.isString(body.extra, {
     required: true,
     min: 1,
   });
 
   if (errorMessage !== null) {
-    errors.color = errorMessage;
+    errors.extra = errorMessage;
   }
   errorMessage = validators.isString(clientId, {
     required: true,
@@ -101,23 +101,23 @@ export const validateAndAddColor = ({clientId},body, knex) => {
   if (!validators.isEmptyObject(errors)) {
     return Promise.reject(
       new ValidationError({
-        name: 'Color',
+        name: 'Extra',
         status: 400,
         code: 'invalid_create_',
-        message: `Invalid create Color input data ${JSON.stringify(errors)}`,
-        debugMessage: '[Color] Error in createColor.',
+        message: `Invalid create Extra input data ${JSON.stringify(errors)}`,
+        debugMessage: '[Extra] Error in createExtra.',
         error: errors,
       })
     );
   }
-  return colorService.addColor(body, knex);
+  return extraService.addExtra(body, knex);
 };
 
 /**
- * @function validateAndUpdateColor
+ * @function validateAndUpdateExtra
  */
 
-export const validateAndUpdateColor = ({ id, clientId }, body, knex) => {
+export const validateAndUpdateExtra = ({ id, clientId }, body, knex) => {
   const errors = {};
 
    let errorMessage = validators.isString(id, {
@@ -128,15 +128,6 @@ export const validateAndUpdateColor = ({ id, clientId }, body, knex) => {
     errors.id = errorMessage;
   }
 
-  if (body.name) {
-    errorMessage = validators.isString(body.name, {
-      required: true,
-      min: 1,
-    });
-    if (errorMessage !== null) {
-      errors.name = errorMessage;
-    }
-  }
   errorMessage = validators.isString(clientId, {
     required: true,
     min: 1,
@@ -149,24 +140,24 @@ export const validateAndUpdateColor = ({ id, clientId }, body, knex) => {
   if (!validators.isEmptyObject(errors)) {
     return Promise.reject(
       new ValidationError({
-        name: 'Color',
+        name: 'Extra',
         status: 400,
-        code: 'invalid_update_Color',
-        message: `Invalid update Color input data ${JSON.stringify(errors)}`,
-        debugMessage: '[Color] Error in updateColor.',
+        code: 'invalid_update_Extra',
+        message: `Invalid update Extra input data ${JSON.stringify(errors)}`,
+        debugMessage: '[Extra] Error in updateExtra.',
         error: errors,
       })
     );
   }
 
-  return colorService.updateColor({ id }, body, knex);
+  return extraService.updateExtra({ id }, body, knex);
 };
 
 /**
- * @function validateAndDeleteColor
+ * @function validateAndDeleteExtra
  */
 
-export const validateAndDeleteColor = ({ id, clientId }, knex) => {
+export const validateAndDeleteExtra = ({ id, clientId }, knex) => {
   const errors = {};
    let errorMessage = validators.isString(id, {
     required: true,
@@ -185,16 +176,16 @@ export const validateAndDeleteColor = ({ id, clientId }, knex) => {
     errors.id = errorMessage;
     return Promise.reject(
       new ValidationError({
-        name: 'Color',
+        name: 'Extra',
         status: 400,
-        code: 'invalid_delete_Color',
-        message: `Invalid get Color input data ${JSON.stringify(errors)}`,
-        debugMessage: '[Color] Error in deleteColor.',
+        code: 'invalid_delete_Extra',
+        message: `Invalid get Extra input data ${JSON.stringify(errors)}`,
+        debugMessage: '[Extra] Error in deleteExtra.',
         error: errors,
       })
     );
   }
-  return colorService.deleteColor({ id }, knex);
+  return extraService.deleteExtra({ id }, knex);
 };
-export default { validateAndGetColors, validateAndUpdateColor, validateAndDeleteColor, validateAndGetByIdColor };
+export default { validateAndGetExtras, validateAndUpdateExtra, validateAndDeleteExtra, validateAndGetByIdExtra };
 

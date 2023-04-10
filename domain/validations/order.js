@@ -1,13 +1,13 @@
 import validators from '../utils/validators';
-import * as colorService from '../services';
+import * as orderService from '../services';
 
 import { ValidationError } from '../utils/Errors';
 
 /**
- * @function validateAndGetColor
+ * @function validateAndGetOrder
  */
 
-export const validateAndGetColors = async ({ clientId }, knex) => {
+export const validateAndGetOrders = async ({ clientId }, knex) => {
   const errors = {};
 
   const errorMessage = validators.isString(clientId, {
@@ -22,25 +22,25 @@ export const validateAndGetColors = async ({ clientId }, knex) => {
   if (!validators.isEmptyObject(errors)) {
     return Promise.reject(
       new ValidationError({
-        name: 'Color',
+        name: 'Order',
         status: 400,
-        code: 'invalid_get_Color',
-        message: `Invalid get Color input data ${JSON.stringify(errors)}`,
-        debugMessage: '[Color] Error in getColorById.',
+        code: 'invalid_get_Order',
+        message: `Invalid get Order input data ${JSON.stringify(errors)}`,
+        debugMessage: '[Order] Error in getOrderById.',
         error: errors,
       })
     );
   }
 
-  const data = await colorService.getColors(knex);
+  const data = await orderService.getOrders(knex);
   return data;
 };
 
 /**
- * @function validateAndGetByIdColor
+ * @function validateAndGetByIdOrder
  */
 
-export const validateAndGetByIdColor = ({ id, clientId }, knex) => {
+export const validateAndGetByIdOrder = ({ id, clientId }, knex) => {
   const errors = {};
 
   let errorMessage = validators.isString(id, {
@@ -63,31 +63,31 @@ export const validateAndGetByIdColor = ({ id, clientId }, knex) => {
   if (!validators.isEmptyObject(errors)) {
     return Promise.reject(
       new ValidationError({
-        name: 'Color',
+        name: 'Order',
         status: 400,
-        code: 'invalid_get_Color',
-        message: `Invalid get Color input data ${JSON.stringify(errors)}`,
-        debugMessage: '[Color] Error in getColorById.',
+        code: 'invalid_get_Order',
+        message: `Invalid get Order input data ${JSON.stringify(errors)}`,
+        debugMessage: '[Order] Error in getOrderById.',
         error: errors,
       })
     );
   }
-  return colorService.getColorById({ id }, knex);
+  return orderService.getOrderById({ id }, knex);
 };
 
 /**
- * @function validateAndAddColor
+ * @function validateAndAddOrder
  */
 
-export const validateAndAddColor = ({clientId},body, knex) => {
+export const validateAndAddOrder = ({clientId},body, knex) => {
   const errors = {};
-  let errorMessage = validators.isString(body.color, {
-    required: true,
+  let errorMessage = validators.isString(body.name, {
+    required: false,
     min: 1,
   });
 
   if (errorMessage !== null) {
-    errors.color = errorMessage;
+    errors.name = errorMessage;
   }
   errorMessage = validators.isString(clientId, {
     required: true,
@@ -97,27 +97,34 @@ export const validateAndAddColor = ({clientId},body, knex) => {
   if (errorMessage !== null) {
     errors.clientId = errorMessage;
   }
+  errorMessage = validators.isString(body.customer_id, {
+    required: true,
+    min: 1,
+  });
 
+  if (errorMessage !== null) {
+    errors.cutomer_id = errorMessage;
+  }
   if (!validators.isEmptyObject(errors)) {
     return Promise.reject(
       new ValidationError({
-        name: 'Color',
+        name: 'Order',
         status: 400,
         code: 'invalid_create_',
-        message: `Invalid create Color input data ${JSON.stringify(errors)}`,
-        debugMessage: '[Color] Error in createColor.',
+        message: `Invalid create Order input data ${JSON.stringify(errors)}`,
+        debugMessage: '[Order] Error in createOrder.',
         error: errors,
       })
     );
   }
-  return colorService.addColor(body, knex);
+  return orderService.addOrder(body, knex);
 };
 
 /**
- * @function validateAndUpdateColor
+ * @function validateAndUpdateOrder
  */
 
-export const validateAndUpdateColor = ({ id, clientId }, body, knex) => {
+export const validateAndUpdateOrder = ({ id, clientId }, body, knex) => {
   const errors = {};
 
    let errorMessage = validators.isString(id, {
@@ -130,7 +137,7 @@ export const validateAndUpdateColor = ({ id, clientId }, body, knex) => {
 
   if (body.name) {
     errorMessage = validators.isString(body.name, {
-      required: true,
+      required: false,
       min: 1,
     });
     if (errorMessage !== null) {
@@ -149,24 +156,24 @@ export const validateAndUpdateColor = ({ id, clientId }, body, knex) => {
   if (!validators.isEmptyObject(errors)) {
     return Promise.reject(
       new ValidationError({
-        name: 'Color',
+        name: 'Order',
         status: 400,
-        code: 'invalid_update_Color',
-        message: `Invalid update Color input data ${JSON.stringify(errors)}`,
-        debugMessage: '[Color] Error in updateColor.',
+        code: 'invalid_update_Order',
+        message: `Invalid update Order input data ${JSON.stringify(errors)}`,
+        debugMessage: '[Order] Error in updateOrder.',
         error: errors,
       })
     );
   }
 
-  return colorService.updateColor({ id }, body, knex);
+  return orderService.updateOrder({ id }, body, knex);
 };
 
 /**
- * @function validateAndDeleteColor
+ * @function validateAndDeleteOrder
  */
 
-export const validateAndDeleteColor = ({ id, clientId }, knex) => {
+export const validateAndDeleteOrder = ({ id, clientId }, knex) => {
   const errors = {};
    let errorMessage = validators.isString(id, {
     required: true,
@@ -185,16 +192,16 @@ export const validateAndDeleteColor = ({ id, clientId }, knex) => {
     errors.id = errorMessage;
     return Promise.reject(
       new ValidationError({
-        name: 'Color',
+        name: 'Order',
         status: 400,
-        code: 'invalid_delete_Color',
-        message: `Invalid get Color input data ${JSON.stringify(errors)}`,
-        debugMessage: '[Color] Error in deleteColor.',
+        code: 'invalid_delete_Order',
+        message: `Invalid get Order input data ${JSON.stringify(errors)}`,
+        debugMessage: '[Order] Error in deleteOrder.',
         error: errors,
       })
     );
   }
-  return colorService.deleteColor({ id }, knex);
+  return orderService.deleteOrder({ id }, knex);
 };
-export default { validateAndGetColors, validateAndUpdateColor, validateAndDeleteColor, validateAndGetByIdColor };
+export default { validateAndGetOrders, validateAndUpdateOrder, validateAndDeleteOrder, validateAndGetByIdOrder };
 

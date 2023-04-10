@@ -21,7 +21,7 @@ export const addPriceSchema = {
         example: 1,
       },
       size_id: {
-        type: 'integer',
+        type: ['integer', 'null'],
         description: 'size_id of the price to add',
         example: 2,
       },
@@ -51,7 +51,7 @@ export const addPriceSchema = {
                 example: 1,
               },
               size_id: {
-                type: 'integer',
+                type: ['integer', 'null'],
                 description: 'size_id of the price added',
                 example: 2,
               },
@@ -113,7 +113,7 @@ export const getPriceSchema = {
                 example: 1,
               },
               size_id: {
-                type: 'integer',
+                type: ['integer', 'null'],
                 description: 'size_id of the price ',
                 example: 2,
               },
@@ -181,7 +181,7 @@ export const getPriceByIdSchema = {
                 example: 1,
               },
               size_id: {
-                type: 'integer',
+                type: ['integer', 'null'],
                 description: 'size_id of the price ',
                 example: 2,
               },
@@ -222,7 +222,7 @@ export const updatePriceSchema = {
         example: 1,
       },
       size_id: {
-        type: 'integer',
+        type: ['integer', 'null'],
         description: 'size_id of the price to update',
         example: 2,
       },

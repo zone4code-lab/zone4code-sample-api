@@ -1,6 +1,8 @@
 import objection from 'objection';
 import Type from './type';
 import Size from './size';
+import Extra from './extra';
+import Category from './category';
 const { Model } = objection;
 
 class Product extends Model {
@@ -21,7 +23,6 @@ class Product extends Model {
   }
 
   static get relationMappings() {
-    // const Extra = require('./extra');
     // const Category = require('./category');
     return {
       types: {
@@ -44,30 +45,30 @@ class Product extends Model {
           to: 'sizes.id',
         },
       },
-      // extras: {
-      //   relation: Model.ManyToManyRelation,
-      //   modelClass: Extra,
-      //   join: {
-      //     from: 'products.id',
-      //     through: {
-      //       from: 'product_extra.product_id',
-      //       to: 'product_extra.extra_id',
-      //     },
-      //     to: 'extras.id',
-      //   },
-      // },
-      // categories: {
-      //   relation: Model.ManyToManyRelation,
-      //   modelClass: Category,
-      //   join: {
-      //     from: 'products.id',
-      //     through: {
-      //       from: 'product_category.product_id',
-      //       to: 'product_category.category_id',
-      //     },
-      //     to: 'categories.id',
-      //   },
-      // },
+      extras: {
+        relation: Model.ManyToManyRelation,
+        modelClass: Extra,
+        join: {
+          from: 'products.id',
+          through: {
+            from: 'product_extra.product_id',
+            to: 'product_extra.extra_id',
+          },
+          to: 'extras.id',
+        },
+      },
+      categories: {
+        relation: Model.ManyToManyRelation,
+        modelClass: Category,
+        join: {
+          from: 'products.id',
+          through: {
+            from: 'product_category.product_id',
+            to: 'product_category.category_id',
+          },
+          to: 'categories.id',
+        },
+      },
     };
   }
 }
