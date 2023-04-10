@@ -9,31 +9,31 @@ export const seed = function (knex, Promise) {
           name: 'Mini dress',
           description: 'ASOS DESIGN fluffy cross neck mini dress with ruched detail in pinkJohn Doe is smart',
           image: '22',
-          product_id: 6,
+          product_id: 3,
         },
         {
           name: 'Day dress',
           description: 'ASOS DESIGN embroidered short sleeve midi dress with dobby mesh in ivory',
           image: '27',
-          product_id: 6,
+          product_id: 3,
         },
         {
           name: 'Escalope Grillé Aux Champignons À La Crème',
           description: '',
           image: '127',
-          product_id: 5,
+          product_id: 2,
         },
         {
           name: 'Plat Mixte',
           description: '',
           image: '127',
-          product_id: 5,
+          product_id: 2,
         },
         {
           name: 'Makloub Cordon Bleu',
           description: '',
           image: '127',
-          product_id: 4,
+          product_id: 1,
         },
       ]);
     });

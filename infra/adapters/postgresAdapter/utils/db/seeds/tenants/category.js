@@ -15,11 +15,11 @@ export const seed = function (knex, Promise) {
         },
         {
           name: "clothing",
-          parent_id: 4
+          parent_id: 1
         },
         {
           name: "shoes",
-          parent_id: 4
+          parent_id: 1
         },
       ]);
     });

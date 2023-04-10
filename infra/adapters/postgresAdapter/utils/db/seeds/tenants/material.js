@@ -6,7 +6,7 @@ export const seed = function (knex, Promise) {
       // Inserts seed entries
       return knex('materials').insert([
         {
-          type_id: 8,
+          type_id: 1,
           composition: " 20 % coton"
         }
       ]);

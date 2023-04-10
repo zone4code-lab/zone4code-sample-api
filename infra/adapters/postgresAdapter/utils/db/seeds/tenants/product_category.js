@@ -6,8 +6,8 @@ export const seed = function (knex, Promise) {
       // Inserts seed entries
       return knex('product_category').insert([
         {
-          product_id: 6,
-          category_id: 4
+          product_id: 3,
+          category_id: 1
         }
       ]);
     });

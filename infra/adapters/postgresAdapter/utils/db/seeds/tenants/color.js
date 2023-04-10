@@ -7,11 +7,11 @@ export const seed = function (knex, Promise) {
       return knex('colors').insert([
         {
           color: "yellow",
-          type_id: 8
+          type_id: 1
         },
         {
           color: "pink",
-          type_id: 8
+          type_id: 1
         },
       ]);
     });
