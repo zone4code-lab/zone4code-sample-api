@@ -2,8 +2,8 @@ export default {
   routePrefix: '/documentation',
   swagger: {
     info: {
-      title: 'Swagger BLSM',
-      description: 'Swagger tutorial for BLSM',
+      title: 'Swagger zone4code',
+      description: 'Swagger tutorial for zone4code',
       version: '1.0.0',
     },
     externalDocs: {

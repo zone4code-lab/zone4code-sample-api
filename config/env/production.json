@@ -1,6 +1,6 @@
 {
     "info": {
-        "name": "BLSM Template backend",
+        "name": "zone4code Template backend",
         "Version": "0.0.1",
         "env": "production"
     },
@@ -12,5 +12,5 @@
     "DB_PORT": 27017,
     "DB_USER": "root",
     "DB_PASSWORD": "root",
-    "DB_NAME": "blsm-db-prod"
+    "DB_NAME": "zone4code-db-prod"
 }

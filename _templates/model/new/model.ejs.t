@@ -1,26 +1,32 @@
 ---
-to: infra/adapters/mongoAdapter/schema/<%= name%>.js
+to: infra/adapters/postgresAdapter/schema/<%= name%>.js
 ---
-import mongoose from 'mongoose';
+import objection from 'objection';
+const { Model } = objection;
 
-const schema = new mongoose.Schema(
-  {
-    name: {
-      type: String,
-      default: '',
-    },
-    description: {
-      type: String,
-      default: '',
-    },
-  },
-  {
-    timestamps: true,
+class <%= h.capitalize(name)%> extends Model{
+  static get tableName() {
+    return '<%= name%>';
   }
-);
-schema.index({ name: 'text' });
+
+  static get jsonSchema() {
+    return {
+      type: 'object',
+      // required: [],
+      properties: {
+        name: { type: 'string' },
+        description: { type: 'string' },
+      },
+    };
+  }
+
+  static get relationMappings() {
+    // Importing models here is one way to avoid require loops.
+    return {
+      // Add any required relation mappings here
+    };
+  }
+}
+
 // eslint-disable-next-line import/prefer-default-export
-
-export const schema<%= h.capitalize(name)%> = schema;
-
-export const <%= h.capitalize(name)%>Model = mongoose.model('<%= h.capitalize(name)%>', schema);
+export default <%= h.capitalize(name)%>;

@@ -1,5 +1,5 @@
 ---
-to: infra/adapters/mongoAdapter/schema/index.js
+to: infra/adapters/postgresAdapter/schema/index.js
 inject: true
 append: true
 ---
